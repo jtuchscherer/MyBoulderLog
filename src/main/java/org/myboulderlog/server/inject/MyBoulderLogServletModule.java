@@ -6,6 +6,6 @@ import org.myboulderlog.server.service.MessageServiceImpl;
 public class MyBoulderLogServletModule extends ServletModule {
 
      protected void configureServlets() {
-        serve("/org.myboulderlog.Application/MessageService").with(MessageServiceImpl.class);
+        serve("/myboulderlog/MessageService").with(MessageServiceImpl.class);
      }
 }
