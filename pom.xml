@@ -28,7 +28,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>maven-gwt-plugin</id>
-            <name>Maven GWT``````````````````````````</name>
+            <name>Maven GWT</name>
             <url>https://nexus.codehaus.org/content/repositories/orgcodehausmojo-047/</url>
         </pluginRepository>
         <pluginRepository>
@@ -174,7 +174,8 @@
     </dependencies>
 
     <build>
-        <outputDirectory>war/WEB-INF/classes</outputDirectory>
+        <directory>${project.basedir}/target</directory>
+        <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
@@ -192,7 +193,6 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
-                            <goal>generateAsync</goal>
                             <goal>test</goal>
                         </goals>
                     </execution>
