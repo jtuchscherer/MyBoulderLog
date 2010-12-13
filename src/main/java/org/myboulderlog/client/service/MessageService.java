@@ -14,6 +14,7 @@ public interface MessageService extends RemoteService {
      * Use MessageService.App.getInstance() to access static instance of MessageServiceAsync
      */
     public static class App {
+
         private static final MessageServiceAsync ourInstance = (MessageServiceAsync) GWT.create(MessageService.class);
 
         public static MessageServiceAsync getInstance() {
@@ -22,4 +23,8 @@ public interface MessageService extends RemoteService {
     }
 
     public Collection<MessageDTO> getMessages();
+
+    public MessageDTO createMessage(String message);
+
+    public void deleteMessage(long messageId);
 }

@@ -1,5 +1,6 @@
 package org.myboulderlog.server.dao.objectify;
 
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import org.myboulderlog.server.dao.MessageDAO;
@@ -23,10 +24,11 @@ public class MessageDAOImpl implements MessageDAO {
     /**
      * @param message
      */
-    public void create(final Message message) {
+    public Message create(final Message message) {
         final Objectify service = getService();
 
-        service.put(message);
+        Key<Message> key = service.put(message);
+        return service.get(key);
     }
 
     /**

@@ -34,26 +34,10 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
             log.debug("getMessages");
         }
 
-        // delete
-//        if (request.getParameter("id") != null) {
-//            deleteMessage(request);
-//
-//            response.sendRedirect("index");
-//
-//            return;
-//        }
-
-        createMessage("test1");
-
-        createMessage("test2");
-
-        // get
         Collection<Message> messages = this.messageDAO.getAll();
         ArrayList<MessageDTO> messagesDTOs = new ArrayList<MessageDTO>();
         for (Message message : messages) {
-            MessageDTO messageDTO = new MessageDTO();
-            messageDTO.setMessage(message.getText());
-            messagesDTOs.add(messageDTO);
+            messagesDTOs.add(createMessageDTOFromMessage(message));
         }
 
         if (log.isDebugEnabled()) {
@@ -63,37 +47,30 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
         return messagesDTOs;
     }
 
-    protected void createMessage(
-            final HttpServletRequest request, final HttpServletResponse response)
-    {
-
-        if (log.isDebugEnabled()) {
-            log.debug("doPost");
-        }
-
-        // create
-        createMessage("test");
-//        response.sendRedirect("index");
-    }
-
-    protected void createMessage(String text) {
+    public MessageDTO createMessage(String text) {
         if (log.isDebugEnabled()) {
             log.debug("creating message with text: " + text);
         }
 
-        final Message message = new Message(text);
-        this.messageDAO.create(message);
+        Message message = new Message(text);
+        message = this.messageDAO.create(message);
+        return createMessageDTOFromMessage(message);
+
     }
 
-    protected void deleteMessage(final HttpServletRequest request) {
-        final Long id = Long.valueOf(request.getParameter("id"));
-
+    public void deleteMessage(long messageId) {
         if (log.isDebugEnabled()) {
-            log.debug("deleting message with id: " + id);
+            log.debug("deleting message with id: " + messageId);
         }
 
-        this.messageDAO.deleteById(id);
+        this.messageDAO.deleteById(messageId);
     }
 
+    private MessageDTO createMessageDTOFromMessage(Message message) {
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setId(message.getId());
+        messageDTO.setMessage(message.getText());
+        return messageDTO;
+    }
 
 }

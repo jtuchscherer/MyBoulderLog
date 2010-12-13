@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface MessageDAO {
     Collection<Message> getAll();
 
-    void create(Message message);
+    Message create(Message message);
 
     void deleteById(Long id);
 }
