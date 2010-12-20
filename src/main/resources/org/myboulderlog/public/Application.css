@@ -1,14 +1,9 @@
-/** Add css rules here for your application. */
-
-button {
-  display: block;
-  font-size: 16pt
+.deleteLink {
+    vertical-align: bottom;
+    color: red;
 }
 
-.widePanel {
-  width: 100%
-}
-
-img {
-  margin-top: 20px;
+.messageName {
+    width: 20em;
+    margin-right: 1em;
 }

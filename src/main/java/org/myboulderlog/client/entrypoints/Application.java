@@ -39,7 +39,7 @@ public class Application implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
-        final Label label = new Label("gwt-maven-plugin Archetype :: Project org.codehaus.mojo.gwt-maven-plugin");
+        final Label label = new Label("Welcome to Google App Engine for Java!");
         RootPanel.get().add(label);
         MessageService.App.getInstance().getMessages(new GetMessageAsyncCallback());
     }

@@ -280,7 +280,7 @@
     <properties>
 
         <!-- convenience to define GWT version in one place -->
-        <gwt.version>2.1.0</gwt.version>
+        <gwt.version>2.1.1</gwt.version>
 
         <!--  tell the compiler we can use 1.5 -->
         <maven.compiler.source>1.5</maven.compiler.source>
