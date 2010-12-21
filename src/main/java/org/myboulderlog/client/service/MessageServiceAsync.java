@@ -12,5 +12,5 @@ public interface MessageServiceAsync {
 
     void createMessage(String message, AsyncCallback<MessageDTO> async);
 
-    void deleteMessage(long messageId, AsyncCallback<Void> async);
+    void deleteMessage(long messageId, AsyncCallback<Long> async);
 }

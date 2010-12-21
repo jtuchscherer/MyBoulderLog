@@ -26,7 +26,7 @@
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="compilerMaxHeapSize" value="128" />
+        <setting name="compilerMaxHeapSize" value="512" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
         <setting name="gwtSdkType" value="maven" />
         <setting name="gwtSdkUrl" value="file://$MAVEN_REPOSITORY$/com/google/gwt/gwt-dev/2.1.1/" />

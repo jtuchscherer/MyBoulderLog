@@ -58,12 +58,14 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
 
     }
 
-    public void deleteMessage(long messageId) {
+    public Long deleteMessage(long messageId) {
         if (log.isDebugEnabled()) {
             log.debug("deleting message with id: " + messageId);
         }
 
         this.messageDAO.deleteById(messageId);
+
+        return messageId;
     }
 
     private MessageDTO createMessageDTOFromMessage(Message message) {

@@ -26,5 +26,5 @@ public interface MessageService extends RemoteService {
 
     public MessageDTO createMessage(String message);
 
-    public void deleteMessage(long messageId);
+    public Long deleteMessage(long messageId);
 }

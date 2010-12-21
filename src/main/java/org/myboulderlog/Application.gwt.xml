@@ -6,9 +6,14 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name="com.google.gwt.logging.Logging"/>
 
+    <!-- guice injector for gwt -->
+    <inherits name="com.google.gwt.inject.Inject"/>
+
+    <!-- for testing -->
+    <inherits name="com.google.gwt.junit.JUnit"/>
+
     <!--  inherit css based theme -->
     <inherits name='com.google.gwt.user.theme.standard.Standard'/>
-    <inherits name="com.google.gwt.junit.JUnit"/>
 
     <!-- configure logging -->
     <set-property name="gwt.logging.popupHandler" value="DISABLED" />    
