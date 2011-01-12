@@ -4,6 +4,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
+import org.myboulderlog.client.view.GoodbyeView;
 
 public class GoodbyeViewImpl extends Composite implements GoodbyeView {
     SimplePanel viewPanel = new SimplePanel();

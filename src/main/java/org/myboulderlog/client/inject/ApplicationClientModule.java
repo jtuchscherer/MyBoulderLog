@@ -1,6 +1,5 @@
 package org.myboulderlog.client.inject;
 
-import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -8,8 +7,6 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.user.client.ui.HasOneWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import org.myboulderlog.client.ApplicationUtils;
@@ -19,11 +16,11 @@ import org.myboulderlog.client.mapper.AppActivityMapper;
 import org.myboulderlog.client.mapper.AppPlaceHistoryMapper;
 import org.myboulderlog.client.place.HelloPlace;
 import org.myboulderlog.client.view.GoodbyeView;
-import org.myboulderlog.client.view.GoodbyeViewImpl;
-import org.myboulderlog.client.view.HelloView;
 import org.myboulderlog.client.view.HelloViewImpl;
 import org.myboulderlog.client.view.MainView;
-import org.myboulderlog.client.widget.MainApplicationWidget;
+import org.myboulderlog.client.view.GoodbyeViewImpl;
+import org.myboulderlog.client.view.HelloView;
+import org.myboulderlog.client.view.MainApplicationWidget;
 
 public class ApplicationClientModule extends AbstractGinModule {
     @Override

@@ -1,4 +1,4 @@
-package org.myboulderlog.client.widget;
+package org.myboulderlog.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -16,7 +16,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import org.myboulderlog.client.ApplicationUtils;
 import org.myboulderlog.client.dto.MessageDTO;
-import org.myboulderlog.client.service.MessageService;
 import org.myboulderlog.client.service.MessageServiceAsync;
 
 import java.util.Collection;
