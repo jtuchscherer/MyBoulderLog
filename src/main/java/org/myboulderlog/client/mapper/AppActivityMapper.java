@@ -5,31 +5,32 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.myboulderlog.client.activity.GoodbyeActivity;
-import org.myboulderlog.client.activity.HelloActivity;
-import org.myboulderlog.client.place.GoodbyePlace;
-import org.myboulderlog.client.place.HelloPlace;
+import org.myboulderlog.client.activity.MessageDetailActivity;
+import org.myboulderlog.client.activity.MessageListActivity;
+import org.myboulderlog.client.place.MessageDetailPlace;
+import org.myboulderlog.client.place.MessageListPlace;
 
 public class AppActivityMapper implements ActivityMapper {
 
-    Provider<HelloActivity> helloActivityProvider;
-    Provider<GoodbyeActivity> goodbyeActivityProvider;
+    Provider<MessageListActivity> messageListActivityProvider;
+    Provider<MessageDetailActivity> messageDetailActivityProvider;
 
     @Inject
     public AppActivityMapper(
-            final Provider<HelloActivity> helloActivityProvider, final Provider<GoodbyeActivity> goodbyeActivityProvider)
+            final Provider<MessageListActivity> messageListActivityProvider, final Provider<MessageDetailActivity> messageDetailActivityProvider)
     {
         super();
-        this.helloActivityProvider = helloActivityProvider;
-        this.goodbyeActivityProvider = goodbyeActivityProvider;
+        this.messageListActivityProvider = messageListActivityProvider;
+        this.messageDetailActivityProvider = messageDetailActivityProvider;
     }
 
     public Activity getActivity(Place place) {
         // Beg and ye shall receive Gin.
-        if (place instanceof HelloPlace) {
-            return helloActivityProvider.get().withPlace((HelloPlace) place);
-        } else if (place instanceof GoodbyePlace) return goodbyeActivityProvider.get().withPlace((GoodbyePlace) place);
-
+        if (place instanceof MessageListPlace) {
+            return messageListActivityProvider.get().withPlace((MessageListPlace) place);
+        } else if (place instanceof MessageDetailPlace) {
+            return messageDetailActivityProvider.get().withPlace((MessageDetailPlace) place);
+        }
         return null;
     }
 }

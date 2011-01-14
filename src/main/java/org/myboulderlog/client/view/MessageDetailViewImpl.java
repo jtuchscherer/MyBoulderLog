@@ -4,18 +4,17 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
-import org.myboulderlog.client.view.GoodbyeView;
 
-public class GoodbyeViewImpl extends Composite implements GoodbyeView {
+public class MessageDetailViewImpl extends Composite implements MessageDetailView {
     SimplePanel viewPanel = new SimplePanel();
-    Element nameSpan = DOM.createSpan();
+    Element messageDetailSpan = DOM.createSpan();
 
-    public GoodbyeViewImpl() {
-        viewPanel.getElement().appendChild(nameSpan);
+    public MessageDetailViewImpl() {
+        viewPanel.getElement().appendChild(messageDetailSpan);
         initWidget(viewPanel);
     }
 
     public void setName(String name) {
-        nameSpan.setInnerText("Good-bye, " + name);
+        messageDetailSpan.setInnerText(name);
     }
 }

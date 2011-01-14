@@ -4,7 +4,7 @@
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <g:HorizontalPanel>
-    <g:Label ui:field="label">label</g:Label>
+    <g:Anchor ui:field="label">label</g:Anchor>
     <g:Anchor ui:field="anchor">anchor</g:Anchor>
   </g:HorizontalPanel>
 

@@ -1,0 +1,14 @@
+<!-- MessageListViewImpl.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:VerticalPanel ui:field="messageListPanel">
+        <g:Label>My Boulder log</g:Label>
+        <g:HorizontalPanel>
+            <g:TextBox ui:field="newMessageTextBox"/>
+            <g:Button ui:field="addMessageButton">Add</g:Button>
+        </g:HorizontalPanel>
+    </g:VerticalPanel>
+
+</ui:UiBinder>

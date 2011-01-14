@@ -3,8 +3,7 @@ package org.myboulderlog.client.view;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
 
-public interface HelloView extends IsWidget {
-    void setName(String helloName);
+public interface MessageListView extends IsWidget {
     void setPresenter(Presenter presenter);
 
     public interface Presenter {
