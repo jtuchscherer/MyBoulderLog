@@ -2,7 +2,6 @@ package org.myboulderlog.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -15,8 +14,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.myboulderlog.client.ApplicationUtils;
 import org.myboulderlog.client.dto.MessageDTO;
+import org.myboulderlog.client.place.MessageDetailPlace;
 import org.myboulderlog.client.service.MessageServiceAsync;
 
 import java.util.Collection;
@@ -29,14 +30,16 @@ public class MessageListViewImpl extends Composite implements MessageListView {
 
     private final Logger logger = Logger.getLogger("MessageListViewImpl");
 
-    private ApplicationUtils applicationUtils;
-    private MessageListView.Presenter presenter;
-
+    private final Provider<MessageWidget> messageWidgetProvider;
     private MessageServiceAsync messageSeviceAsync;
+    private ApplicationUtils applicationUtils;
+
     private HashMap<Long, Widget> widgetMap = new HashMap<Long, Widget>();
+    private MessageListView.Presenter presenter;
 
     interface MainApplicationWidgetUiBinder extends UiBinder<Widget, MessageListViewImpl> {
     }
+
     private static MainApplicationWidgetUiBinder uiBinder = GWT.create(MainApplicationWidgetUiBinder.class);
 
     @UiField
@@ -61,7 +64,12 @@ public class MessageListViewImpl extends Composite implements MessageListView {
     }
 
     @Inject
-    public MessageListViewImpl(MessageServiceAsync messageSeviceAsync, ApplicationUtils applicationUtils) {
+    public MessageListViewImpl(
+            Provider<MessageWidget> messageWidgetProvider,
+            MessageServiceAsync messageSeviceAsync,
+            ApplicationUtils applicationUtils)
+    {
+        this.messageWidgetProvider = messageWidgetProvider;
         this.messageSeviceAsync = messageSeviceAsync;
         this.applicationUtils = applicationUtils;
 
@@ -71,7 +79,6 @@ public class MessageListViewImpl extends Composite implements MessageListView {
 
         //wire it up
         newMessageTextBox.setFocus(true);
-
     }
 
     public void loadMessages() {
@@ -82,17 +89,10 @@ public class MessageListViewImpl extends Composite implements MessageListView {
         messageSeviceAsync.createMessage(message, new CreateMessageAsyncCallback());
     }
 
-    private void deleteMessage(long messageId) {
-        messageSeviceAsync.deleteMessage(messageId, new DeleteMessageAsyncCallback());
-    }
-
     private void createMessageWidget(final MessageDTO messageDTO) {
-        ClickHandler deleteHandler = new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                deleteMessage(messageDTO.getId());
-            }
-        };
-        MessageWidget messageWidget = new MessageWidget(messageDTO, deleteHandler, presenter);
+        MessageWidget messageWidget = messageWidgetProvider.get();
+        messageWidget.setMessage(messageDTO);
+        messageWidget.setContainer(this);
         messageListPanel.add(messageWidget);
         widgetMap.put(messageDTO.getId(), messageWidget);
     }
@@ -108,7 +108,6 @@ public class MessageListViewImpl extends Composite implements MessageListView {
                 createMessageWidget(messageDTO);
             }
         }
-
     }
 
     private class CreateMessageAsyncCallback implements AsyncCallback<MessageDTO> {
@@ -124,19 +123,17 @@ public class MessageListViewImpl extends Composite implements MessageListView {
 
     }
 
-    private class DeleteMessageAsyncCallback implements AsyncCallback<Long> {
-        public void onFailure(Throwable caught) {
-            applicationUtils.handleFailure(caught);
-        }
-
-        public void onSuccess(Long messageId) {
-            //delete message widget from widget list
-            logger.log(Level.INFO, "Deleting widget: " + messageId);
-            messageListPanel.remove(widgetMap.get(messageId));
-        }
-    }
-
     public void setPresenter(MessageListView.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void onMessageDeleteSuccess(Long messageId) {
+        //delete message widget from widget list
+        logger.log(Level.INFO, "Deleting widget: " + messageId);
+        messageListPanel.remove(widgetMap.get(messageId));
+    }
+
+    public void onMessageDetailLinkClicked(MessageDTO message) {
+        presenter.goTo(new MessageDetailPlace(message.getMessage()));
     }
 }

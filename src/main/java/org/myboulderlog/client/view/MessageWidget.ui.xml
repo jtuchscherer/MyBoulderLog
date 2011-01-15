@@ -4,8 +4,8 @@
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <g:HorizontalPanel>
-    <g:Anchor ui:field="label">label</g:Anchor>
-    <g:Anchor ui:field="anchor">anchor</g:Anchor>
+    <g:Anchor ui:field="label" styleName="messageName"/>
+    <g:Anchor ui:field="anchor" styleName="deleteLink">Delete</g:Anchor>
   </g:HorizontalPanel>
 
 </ui:UiBinder>
