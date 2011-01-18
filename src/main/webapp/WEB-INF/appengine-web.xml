@@ -10,5 +10,7 @@
     <application>myboulderlog</application>
     <version>0</version>
 
+    <precompilation-enabled>true</precompilation-enabled>
+
     <sessions-enabled>true</sessions-enabled>
 </appengine-web-app>
