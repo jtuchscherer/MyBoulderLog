@@ -49,6 +49,7 @@ public class MockEnvironment implements ApiProxy.Environment {
     /**
      * @see com.google.apphosting.api.ApiProxy.Environment#getRequestNamespace()
      */
+    @Deprecated
     public String getRequestNamespace() {
         return "";
     }

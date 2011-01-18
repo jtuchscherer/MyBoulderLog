@@ -30,9 +30,7 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
 
     public Collection<MessageDTO> getMessages() {
 
-        if (log.isDebugEnabled()) {
-            log.debug("getMessages");
-        }
+        log.debug("getMessages");
 
         Collection<Message> messages = this.messageDAO.getAll();
         ArrayList<MessageDTO> messagesDTOs = new ArrayList<MessageDTO>();
@@ -40,17 +38,14 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
             messagesDTOs.add(createMessageDTOFromMessage(message));
         }
 
-        if (log.isDebugEnabled()) {
-            log.debug("messages: " + messages);
-        }
+        log.debug("messages: " + messages);
 
         return messagesDTOs;
     }
 
     public MessageDTO createMessage(String text) {
-        if (log.isDebugEnabled()) {
-            log.debug("creating message with text: " + text);
-        }
+
+        log.debug("creating message with text: " + text);
 
         Message message = new Message(text);
         message = this.messageDAO.create(message);
@@ -59,9 +54,7 @@ public class MessageServiceImpl extends RemoteServiceServlet implements MessageS
     }
 
     public Long deleteMessage(long messageId) {
-        if (log.isDebugEnabled()) {
-            log.debug("deleting message with id: " + messageId);
-        }
+        log.debug("deleting message with id: " + messageId);
 
         this.messageDAO.deleteById(messageId);
 

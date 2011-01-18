@@ -1,7 +1,6 @@
 package org.myboulderlog.server.model;
 
 import javax.persistence.Id;
-import java.io.Serializable;
 
 /**
  */
