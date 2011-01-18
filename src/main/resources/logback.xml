@@ -8,7 +8,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.google.appengine.repackaged.com.google.common.base.FinalizableReferenceQueue" level="warning"/>
+  <logger name="com.google.appengine.repackaged.com.google.common.base" level="warning"/>
 
   <root level="debug">
     <appender-ref ref="STDOUT" />
