@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.myboulderlog.client.ApplicationUtils;
-import org.myboulderlog.client.dto.MessageDTO;
+import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.place.MessageDetailPlace;
 import org.myboulderlog.client.service.MessageServiceAsync;
 

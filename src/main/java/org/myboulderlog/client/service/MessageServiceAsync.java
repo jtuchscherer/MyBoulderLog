@@ -1,7 +1,7 @@
 package org.myboulderlog.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.myboulderlog.client.dto.MessageDTO;
+import org.myboulderlog.shared.dto.MessageDTO;
 
 import java.util.Collection;
 

@@ -11,11 +11,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import org.myboulderlog.client.ApplicationUtils;
-import org.myboulderlog.client.dto.MessageDTO;
-import org.myboulderlog.client.place.MessageDetailPlace;
+import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.service.MessageServiceAsync;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageWidget extends Composite {

@@ -1,5 +1,6 @@
 package org.myboulderlog.client.inject;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
@@ -12,5 +13,5 @@ public interface ApplicationGinjector extends Ginjector {
 
     PlaceHistoryHandler getPlaceHistoryHandler();
     MainView getAppWidget();
-
+    EventBus getEventBus();
 }

@@ -2,8 +2,6 @@ package org.myboulderlog.server.model;
 
 import javax.persistence.Id;
 
-/**
- */
 public class Message {
     @Id
     private Long id;
@@ -23,16 +21,10 @@ public class Message {
         this.text = _text;
     }
 
-    /**
-     * @return id of the message
-     */
     public Long getId() {
         return this.id;
     }
 
-    /**
-     * @return text of the message
-     */
     public String getText() {
         return this.text;
     }

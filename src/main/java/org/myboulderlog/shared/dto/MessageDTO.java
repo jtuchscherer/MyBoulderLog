@@ -1,4 +1,4 @@
-package org.myboulderlog.client.dto;
+package org.myboulderlog.shared.dto;
 
 import java.io.Serializable;
 
