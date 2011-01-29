@@ -1,6 +1,7 @@
 package org.myboulderlog.client.inject;
 
 import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -20,6 +21,7 @@ import org.myboulderlog.client.view.MessageDetailViewImpl;
 import org.myboulderlog.client.view.MessageListView;
 import org.myboulderlog.client.view.MessageListViewImpl;
 import org.myboulderlog.client.view.MainView;
+import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 
 public class ApplicationClientModule extends AbstractGinModule {
     @Override
@@ -52,5 +54,13 @@ public class ApplicationClientModule extends AbstractGinModule {
     @Singleton
     public PlaceController getPlaceController(EventBus eventBus) {
         return new PlaceController(eventBus);
+    }
+
+    @Provides
+    @Singleton
+    public BoulderLogRequestFactory getRequestFactory(EventBus eventBus) {
+        BoulderLogRequestFactory boulderLogRequestFactory = GWT.create(BoulderLogRequestFactory.class);
+        boulderLogRequestFactory.initialize(eventBus);
+        return boulderLogRequestFactory;
     }
 }

@@ -23,9 +23,7 @@ public class RouteEntryPoint implements EntryPoint {
         ApplicationGinjector injector = GWT.create(ApplicationGinjector.class);
         RootPanel.get().add(injector.getAppWidget());
 
-        final EventBus eventBus = injector.getEventBus();
-        BoulderLogRequestFactory requestFactory = GWT.create(BoulderLogRequestFactory.class);
-        requestFactory.initialize(eventBus);
+        BoulderLogRequestFactory requestFactory = injector.getRequestFactory();
         RouteRequest request = requestFactory.routeRequest();
         RouteProxy routeProxy = request.create(RouteProxy.class);
         routeProxy.setName("test");

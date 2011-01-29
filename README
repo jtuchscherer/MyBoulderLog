@@ -1,3 +1,8 @@
-Example application for Google App Engine using GWT, Gin, Objectify and the MVP pattern built with Maven
+Example application for Google App Engine using GWT, Gin, Objectify and the MVP and RequestFactory pattern built with Maven
 
-Heavily influenced by http://code.google.com/p/listwidget
+Heavily influenced by
+http://code.google.com/p/listwidget
+https://github.com/mgenov/injecting-request-factory
+https://github.com/etiennep/Wandering-Canadian
+
+Thanks to creators of the above mentioned projects.

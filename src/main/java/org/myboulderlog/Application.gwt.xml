@@ -29,8 +29,6 @@
     <!-- Specify the application specific style sheet.              -->
     <stylesheet src='Application.css'/>
 
-    <servlet path="/MessageService" class="org.myboulderlog.server.service.MessageServiceImpl"/>
-
     <source path='client'/>
     <source path='shared'/>
 </module>

@@ -7,7 +7,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
 public class GuiceServletConfig  extends GuiceServletContextListener {
 
     protected Injector getInjector() {
-        return Guice.createInjector(new MyBoulderLogServletModule(), new MyBoulderLogModule());
+        return Guice.createInjector(new RequestFactoryInjectingModule("/myboulderlog/gwtRequest"), new MyBoulderLogServletModule(), new MyBoulderLogModule());
     }
 
 

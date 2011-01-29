@@ -5,20 +5,20 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 import com.googlecode.objectify.helper.DAOBase;
+import org.myboulderlog.server.dao.AbstractDAO;
 import org.myboulderlog.shared.exception.TooManyResultsException;
 
 import javax.persistence.Embedded;
 import javax.persistence.Transient;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractObjectifyDAO<T> extends DAOBase {
+public abstract class AbstractObjectifyDAO<T> extends DAOBase implements AbstractDAO<T> {
 
     static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
