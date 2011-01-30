@@ -1,8 +1,10 @@
 package org.myboulderlog.server.inject;
 
 import com.google.inject.AbstractModule;
+import org.myboulderlog.server.dao.AbstractDAO;
 import org.myboulderlog.server.dao.MessageDAO;
 import org.myboulderlog.server.dao.RouteDAO;
+import org.myboulderlog.server.dao.objectify.AbstractObjectifyDAO;
 import org.myboulderlog.server.dao.objectify.MessageDAOImpl;
 import org.myboulderlog.server.dao.objectify.RouteDAOImpl;
 

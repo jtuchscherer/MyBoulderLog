@@ -2,6 +2,7 @@ package org.myboulderlog.server.inject;
 
 import com.google.gwt.requestfactory.server.ServiceLayerDecorator;
 import com.google.gwt.requestfactory.shared.Locator;
+import com.google.gwt.requestfactory.shared.Service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -38,8 +39,9 @@ public class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
 
     @Override
     public Object createServiceInstance(Method contextMethod, Method domainMethod) {
-        Class<?> serviceClazz = domainMethod.getDeclaringClass();
-        return injector.getInstance(serviceClazz);
+        Class<?> enclosing = contextMethod.getDeclaringClass();
+	    Service s = enclosing.getAnnotation(Service.class);
+        return injector.getInstance(s.value());
     }
 
 }

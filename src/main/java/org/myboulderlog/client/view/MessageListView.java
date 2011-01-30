@@ -11,6 +11,8 @@ public interface MessageListView extends IsWidget {
 
     void onMessageDetailLinkClicked(MessageDTO message);
 
+    public void createMessageWidget(final MessageDTO messageDTO);
+
     public interface Presenter {
         void goTo(Place place);
     }

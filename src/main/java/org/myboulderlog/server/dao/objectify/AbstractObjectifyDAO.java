@@ -12,17 +12,28 @@ import javax.persistence.Embedded;
 import javax.persistence.Transient;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
+import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Generic DAO for use with Objectify
+ *
+ * @param <T>
+ * @author turbomanage
+ */
 public abstract class AbstractObjectifyDAO<T> extends DAOBase implements AbstractDAO<T> {
 
     static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
-    protected Class<T> clazz;
+    protected Class<T> clazz =
+            (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+    public Class<T> getClazz() {
+        return clazz;
+    }
 
     public Key<T> put(T entity)
 
@@ -51,7 +62,7 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
     }
 
     public T get(Long id) throws EntityNotFoundException {
-        return ofy().get(this.clazz, id);
+        return ofy().get(this.getClazz(), id);
     }
 
     public T get(Key<T> key) throws EntityNotFoundException {
@@ -63,7 +74,7 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
     }
 
     public List<T> listAll() {
-        Query<T> q = ofy().query(clazz);
+        Query<T> q = ofy().query(this.getClazz());
         return q.list();
     }
 
@@ -76,9 +87,9 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
      * @throws TooManyResultsException
      */
     public T getByProperty(String propName, Object propValue) throws TooManyResultsException {
-        Query<T> q = ofy().query(clazz);
+        Query<T> q = ofy().query(this.getClazz());
         q.filter(propName, propValue);
-        Iterator<T> fetch = q.limit(2).iterator();
+        Iterator<T> fetch = q.limit(2).list().iterator();
         if (!fetch.hasNext()) {
             return null;
         }
@@ -90,20 +101,20 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
     }
 
     public List<T> listByProperty(String propName, Object propValue) {
-        Query<T> q = ofy().query(clazz);
+        Query<T> q = ofy().query(this.getClazz());
         q.filter(propName, propValue);
-        return asList(q);
+        return q.list();
     }
 
     public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
-        Query<T> q = ofy().query(clazz);
+        Query<T> q = ofy().query(this.getClazz());
         q.filter(propName, propValue);
-        return asKeyList(q.fetchKeys());
+        return q.listKeys();
     }
 
     public T getByExample(T exampleObj) throws TooManyResultsException {
         Query<T> q = buildQueryByExample(exampleObj);
-        Iterator<T> fetch = q.limit(2).iterator();
+        Iterator<T> fetch = q.limit(2).list().iterator();
         if (!fetch.hasNext()) {
             return null;
         }
@@ -116,11 +127,11 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
 
     public List<T> listByExample(T exampleObj) {
         Query<T> queryByExample = buildQueryByExample(exampleObj);
-        return asList(queryByExample);
+        return queryByExample.list();
     }
 
     public Key<T> getKey(Long id) {
-        return new Key<T>(this.clazz, id);
+        return new Key<T>(this.getClazz(), id);
     }
 
     public Key<T> key(T obj) {
@@ -128,37 +139,22 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
     }
 
     public List<T> listChildren(Object parent) {
-        return asList(ofy().query(clazz).ancestor(parent));
+        return ofy().query(this.getClazz()).ancestor(parent).list();
     }
 
     public List<Key<T>> listChildKeys(Object parent) {
-        return asKeyList(ofy().query(clazz).ancestor(parent).fetchKeys());
-    }
-
-    protected List<T> asList(Iterable<T> iterable) {
-        ArrayList<T> list = new ArrayList<T>();
-        for (T t : iterable) {
-            list.add(t);
-        }
-        return list;
-    }
-
-    protected List<Key<T>> asKeyList(Iterable<Key<T>> iterableKeys) {
-        ArrayList<Key<T>> keys = new ArrayList<Key<T>>();
-        for (Key<T> key : iterableKeys) {
-            keys.add(key);
-        }
-        return keys;
+        return ofy().query(this.getClazz()).ancestor(parent).listKeys();
     }
 
     protected Query<T> buildQueryByExample(T exampleObj) {
-        Query<T> q = ofy().query(clazz);
+        Query<T> q = ofy().query(this.getClazz());
 
         // Add all non-null properties to query filter
-        for (Field field : clazz.getDeclaredFields()) {
+        for (Field field : this.getClazz().getDeclaredFields()) {
             // Ignore transient, embedded, array, and collection properties
             if (field.isAnnotationPresent(Transient.class) ||
                     (field.isAnnotationPresent(Embedded.class)) ||
+                    (field.getType().isArray()) ||
                     (field.getType().isArray()) ||
                     (Collection.class.isAssignableFrom(field.getType())) ||
                     ((field.getModifiers() & BAD_MODIFIERS) != 0))

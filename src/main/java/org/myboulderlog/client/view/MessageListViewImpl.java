@@ -19,6 +19,7 @@ import org.myboulderlog.client.ApplicationUtils;
 import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.place.MessageDetailPlace;
 import org.myboulderlog.client.service.MessageServiceAsync;
+import org.myboulderlog.shared.proxy.RouteProxy;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -75,39 +76,22 @@ public class MessageListViewImpl extends Composite implements MessageListView {
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        loadMessages();
-
         //wire it up
         newMessageTextBox.setFocus(true);
     }
 
-    public void loadMessages() {
-        messageSeviceAsync.getMessages(new GetMessageAsyncCallback());
-    }
+
 
     private void addMessage(String message) {
         messageSeviceAsync.createMessage(message, new CreateMessageAsyncCallback());
     }
 
-    private void createMessageWidget(final MessageDTO messageDTO) {
+    public void createMessageWidget(final MessageDTO messageDTO) {
         MessageWidget messageWidget = messageWidgetProvider.get();
         messageWidget.setMessage(messageDTO);
         messageWidget.setContainer(this);
         messageListPanel.add(messageWidget);
         widgetMap.put(messageDTO.getId(), messageWidget);
-    }
-
-    private class GetMessageAsyncCallback implements AsyncCallback<Collection<MessageDTO>> {
-
-        public void onFailure(Throwable caught) {
-            applicationUtils.handleFailure(caught);
-        }
-
-        public void onSuccess(Collection<MessageDTO> result) {
-            for (final MessageDTO messageDTO : result) {
-                createMessageWidget(messageDTO);
-            }
-        }
     }
 
     private class CreateMessageAsyncCallback implements AsyncCallback<MessageDTO> {
