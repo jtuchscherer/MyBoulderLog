@@ -7,7 +7,6 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextBox;
@@ -15,13 +14,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.myboulderlog.client.ApplicationUtils;
-import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.place.MessageDetailPlace;
-import org.myboulderlog.client.service.MessageServiceAsync;
-import org.myboulderlog.shared.proxy.RouteProxy;
+import org.myboulderlog.shared.dto.MessageDTO;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,8 +27,6 @@ public class MessageListViewImpl extends Composite implements MessageListView {
     private final Logger logger = Logger.getLogger("MessageListViewImpl");
 
     private final Provider<MessageWidget> messageWidgetProvider;
-    private MessageServiceAsync messageSeviceAsync;
-    private ApplicationUtils applicationUtils;
 
     private HashMap<Long, Widget> widgetMap = new HashMap<Long, Widget>();
     private MessageListView.Presenter presenter;
@@ -52,7 +45,7 @@ public class MessageListViewImpl extends Composite implements MessageListView {
     @UiHandler("newMessageTextBox")
     void onKeyPress(KeyPressEvent event) {
         if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-            addMessage(newMessageTextBox.getText());
+            presenter.addMessage(newMessageTextBox.getText());
         }
     }
 
@@ -61,29 +54,22 @@ public class MessageListViewImpl extends Composite implements MessageListView {
 
     @UiHandler("addMessageButton")
     void onClick(ClickEvent event) {
-        addMessage(newMessageTextBox.getText());
+        presenter.addMessage(newMessageTextBox.getText());
     }
 
     @Inject
     public MessageListViewImpl(
-            Provider<MessageWidget> messageWidgetProvider,
-            MessageServiceAsync messageSeviceAsync,
-            ApplicationUtils applicationUtils)
+            Provider<MessageWidget> messageWidgetProvider)
     {
         this.messageWidgetProvider = messageWidgetProvider;
-        this.messageSeviceAsync = messageSeviceAsync;
-        this.applicationUtils = applicationUtils;
-
         initWidget(uiBinder.createAndBindUi(this));
 
         //wire it up
         newMessageTextBox.setFocus(true);
     }
 
-
-
-    private void addMessage(String message) {
-        messageSeviceAsync.createMessage(message, new CreateMessageAsyncCallback());
+    public void resetTestBox() {
+        newMessageTextBox.setValue("");
     }
 
     public void createMessageWidget(final MessageDTO messageDTO) {
@@ -92,19 +78,6 @@ public class MessageListViewImpl extends Composite implements MessageListView {
         messageWidget.setContainer(this);
         messageListPanel.add(messageWidget);
         widgetMap.put(messageDTO.getId(), messageWidget);
-    }
-
-    private class CreateMessageAsyncCallback implements AsyncCallback<MessageDTO> {
-
-        public void onFailure(Throwable caught) {
-            applicationUtils.handleFailure(caught);
-        }
-
-        public void onSuccess(final MessageDTO messageDTO) {
-            newMessageTextBox.setValue("");
-            createMessageWidget(messageDTO);
-        }
-
     }
 
     public void setPresenter(MessageListView.Presenter presenter) {

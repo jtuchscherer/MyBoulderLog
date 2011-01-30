@@ -13,7 +13,11 @@ public interface MessageListView extends IsWidget {
 
     public void createMessageWidget(final MessageDTO messageDTO);
 
+    public void resetTestBox();
+
     public interface Presenter {
         void goTo(Place place);
+
+        void addMessage(String text);
     }
 }

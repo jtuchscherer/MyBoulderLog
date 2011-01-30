@@ -5,7 +5,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import org.myboulderlog.client.place.MessageListPlace;
@@ -15,7 +14,6 @@ import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 import org.myboulderlog.shared.request.RouteRequest;
 
-import java.util.Collection;
 import java.util.List;
 
 public class MessageListActivity extends AbstractActivity implements MessageListView.Presenter {
@@ -67,6 +65,23 @@ public class MessageListActivity extends AbstractActivity implements MessageList
      */
     public void goTo(Place place) {
         placeController.goTo(place);
+    }
+
+    public void addMessage(String text) {
+        RouteRequest routeRequest = boulderLogRequestFactory.routeRequest();
+        RouteProxy newEmployee = routeRequest.create(RouteProxy.class);
+        newEmployee.setName(text);
+        routeRequest.saveAndReturn(newEmployee).fire(new Receiver<RouteProxy>() {
+            @Override
+            public void onSuccess(RouteProxy response) {
+                MessageDTO messageDTO = new MessageDTO();
+                messageDTO.setMessage(response.getName());
+                messageDTO.setId(response.getId());
+                messageListView.createMessageWidget(messageDTO);
+                messageListView.resetTestBox();
+            }
+        }
+        );
     }
 
 }
