@@ -17,7 +17,8 @@ public class AppActivityMapper implements ActivityMapper {
 
     @Inject
     public AppActivityMapper(
-            final Provider<MessageListActivity> messageListActivityProvider, final Provider<MessageDetailActivity> messageDetailActivityProvider)
+            final Provider<MessageListActivity> messageListActivityProvider,
+            final Provider<MessageDetailActivity> messageDetailActivityProvider)
     {
         super();
         this.messageListActivityProvider = messageListActivityProvider;

@@ -3,10 +3,10 @@ package org.myboulderlog.server.service;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.service.MessageService;
 import org.myboulderlog.server.dao.MessageDAO;
 import org.myboulderlog.server.model.Message;
+import org.myboulderlog.shared.dto.MessageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

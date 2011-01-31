@@ -16,11 +16,11 @@ import org.myboulderlog.client.activity.MessageListActivity;
 import org.myboulderlog.client.mapper.AppActivityMapper;
 import org.myboulderlog.client.mapper.AppPlaceHistoryMapper;
 import org.myboulderlog.client.place.MessageListPlace;
+import org.myboulderlog.client.view.MainView;
 import org.myboulderlog.client.view.MessageDetailView;
 import org.myboulderlog.client.view.MessageDetailViewImpl;
 import org.myboulderlog.client.view.MessageListView;
 import org.myboulderlog.client.view.MessageListViewImpl;
-import org.myboulderlog.client.view.MainView;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 
 public class ApplicationClientModule extends AbstractGinModule {
@@ -41,9 +41,7 @@ public class ApplicationClientModule extends AbstractGinModule {
     @Provides
     @Singleton
     public PlaceHistoryHandler getHistoryHandler(
-            PlaceController placeController,
-            PlaceHistoryMapper historyMapper,
-            EventBus eventBus)
+            PlaceController placeController, PlaceHistoryMapper historyMapper, EventBus eventBus)
     {
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
         historyHandler.register(placeController, eventBus, new MessageListPlace());

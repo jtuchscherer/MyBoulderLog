@@ -1,8 +1,6 @@
 package org.myboulderlog.server.dao.objectify;
 
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.helper.DAOBase;
 import org.myboulderlog.server.dao.MessageDAO;
 import org.myboulderlog.server.model.Message;

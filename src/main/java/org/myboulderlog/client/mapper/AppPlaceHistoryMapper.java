@@ -6,6 +6,5 @@ import org.myboulderlog.client.place.MessageDetailPlace;
 import org.myboulderlog.client.place.MessageListPlace;
 
 @WithTokenizers({MessageListPlace.Tokenizer.class, MessageDetailPlace.Tokenizer.class})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper
-{
+public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

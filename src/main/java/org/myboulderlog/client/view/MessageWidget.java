@@ -11,8 +11,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import org.myboulderlog.client.ApplicationUtils;
-import org.myboulderlog.shared.dto.MessageDTO;
 import org.myboulderlog.client.service.MessageServiceAsync;
+import org.myboulderlog.shared.dto.MessageDTO;
 
 import java.util.logging.Logger;
 
@@ -28,6 +28,7 @@ public class MessageWidget extends Composite {
 
     interface MessageWidgetUiBinder extends UiBinder<Widget, MessageWidget> {
     }
+
     private static MessageWidgetUiBinder uiBinder = GWT.create(MessageWidgetUiBinder.class);
 
     @UiField

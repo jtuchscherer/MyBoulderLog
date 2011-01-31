@@ -6,10 +6,7 @@ import com.google.gwt.requestfactory.shared.Service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.lang.reflect.Method;
-import java.util.Set;
 
 /**
  * InjectingServiceLayerDecorator is a ServiceLayerDecorator that uses DI to inject
@@ -40,7 +37,7 @@ public class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
     @Override
     public Object createServiceInstance(Method contextMethod, Method domainMethod) {
         Class<?> enclosing = contextMethod.getDeclaringClass();
-	    Service s = enclosing.getAnnotation(Service.class);
+        Service s = enclosing.getAnnotation(Service.class);
         return injector.getInstance(s.value());
     }
 

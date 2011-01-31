@@ -1,6 +1,5 @@
 package org.myboulderlog.shared.proxy;
 
-import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 import org.myboulderlog.server.locator.ObjectifyLocator;
 import org.myboulderlog.server.model.Route;

@@ -1,7 +1,6 @@
 package org.myboulderlog.server.dao.objectify;
 
 import com.googlecode.objectify.Key;
-import org.myboulderlog.server.dao.AbstractDAO;
 import org.myboulderlog.server.dao.RouteDAO;
 import org.myboulderlog.server.model.Route;
 

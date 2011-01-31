@@ -10,20 +10,20 @@ import org.myboulderlog.client.mapper.AppActivityMapper;
 @Singleton
 public class MainView extends SimplePanel {
 
-  /**
-   * This is a very simple example. In case you have multiple display area,
-   * you would inject the ActivityMapper for each display area here in order
-   * to register it and the display area widget. In this example, the MainView IS the
-   * display area. In a more complex example, this widget would be the container
-   * for the other display areas and therefore would know about them.
-   *
-   * @param mapper
-   * @param eventBus
-   */
-	@Inject
-	public MainView(AppActivityMapper mapper, EventBus eventBus) {
-		ActivityManager activityManager = new ActivityManager(mapper, eventBus);
-		activityManager.setDisplay(this);
-	}
+    /**
+     * This is a very simple example. In case you have multiple display area,
+     * you would inject the ActivityMapper for each display area here in order
+     * to register it and the display area widget. In this example, the MainView IS the
+     * display area. In a more complex example, this widget would be the container
+     * for the other display areas and therefore would know about them.
+     *
+     * @param mapper
+     * @param eventBus
+     */
+    @Inject
+    public MainView(AppActivityMapper mapper, EventBus eventBus) {
+        ActivityManager activityManager = new ActivityManager(mapper, eventBus);
+        activityManager.setDisplay(this);
+    }
 
 }
