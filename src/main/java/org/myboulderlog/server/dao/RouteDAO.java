@@ -4,7 +4,7 @@ import org.myboulderlog.server.model.Route;
 
 public interface RouteDAO extends AbstractDAO<Route> {
 
-    public Route saveAndReturn(Route list);
+    public Route saveAndReturn(Route route);
 
-//    public List<Route> listAll();
+    public void deleteById(Long id);
 }

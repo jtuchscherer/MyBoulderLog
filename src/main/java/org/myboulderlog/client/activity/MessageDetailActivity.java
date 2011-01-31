@@ -4,7 +4,7 @@ import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
-import org.myboulderlog.client.place.MessageDetailPlace;
+import org.myboulderlog.client.place.RouteDetailPlace;
 import org.myboulderlog.client.view.MessageDetailView;
 
 public class MessageDetailActivity extends AbstractActivity {
@@ -18,7 +18,7 @@ public class MessageDetailActivity extends AbstractActivity {
         this.messageDetailView = messageDetailView;
     }
 
-    public MessageDetailActivity withPlace(MessageDetailPlace place) {
+    public MessageDetailActivity withPlace(RouteDetailPlace place) {
         this.messageDetail = place.getMessageName();
         return this;
     }

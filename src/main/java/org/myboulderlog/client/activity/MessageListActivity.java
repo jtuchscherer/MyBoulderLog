@@ -8,27 +8,26 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import org.myboulderlog.client.place.MessageListPlace;
-import org.myboulderlog.client.view.MessageListView;
-import org.myboulderlog.shared.dto.MessageDTO;
+import org.myboulderlog.client.view.RouteListView;
 import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 import org.myboulderlog.shared.request.RouteRequest;
 
 import java.util.List;
 
-public class MessageListActivity extends AbstractActivity implements MessageListView.Presenter {
+public class MessageListActivity extends AbstractActivity implements RouteListView.Presenter {
 
-    private MessageListView messageListView;
+    private RouteListView routeListView;
     PlaceController placeController;
     private BoulderLogRequestFactory boulderLogRequestFactory;
 
     @Inject
     public MessageListActivity(
-            MessageListView messageListView,
+            RouteListView routeListView,
             PlaceController placeController,
             BoulderLogRequestFactory boulderLogRequestFactory)
     {
-        this.messageListView = messageListView;
+        this.routeListView = routeListView;
         this.placeController = placeController;
         this.boulderLogRequestFactory = boulderLogRequestFactory;
     }
@@ -41,23 +40,20 @@ public class MessageListActivity extends AbstractActivity implements MessageList
      * Invoked by the ActivityManager to start a new Activity
      */
     public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-        messageListView.setPresenter(this);
+        routeListView.setPresenter(this);
+        routeListView.clearRouteList();
         RouteRequest routeRequest = boulderLogRequestFactory.routeRequest();
         routeRequest.listAll().fire(new Receiver<List<RouteProxy>>() {
             @Override
             public void onSuccess(List<RouteProxy> response) {
                 for (final RouteProxy r : response) {
-                    MessageDTO messageDTO = new MessageDTO();
-                    messageDTO.setMessage(r.getName());
-                    messageDTO.setId(r.getId());
-
-                    messageListView.createMessageWidget(messageDTO);
+                    routeListView.createRouteWidget(r);
                 }
             }
         }
         );
 
-        containerWidget.setWidget(messageListView.asWidget());
+        containerWidget.setWidget(routeListView.asWidget());
     }
 
     /**
@@ -67,18 +63,26 @@ public class MessageListActivity extends AbstractActivity implements MessageList
         placeController.goTo(place);
     }
 
-    public void addMessage(String text) {
+    public void addRoute(String text) {
         RouteRequest routeRequest = boulderLogRequestFactory.routeRequest();
         RouteProxy newEmployee = routeRequest.create(RouteProxy.class);
         newEmployee.setName(text);
         routeRequest.saveAndReturn(newEmployee).fire(new Receiver<RouteProxy>() {
             @Override
             public void onSuccess(RouteProxy response) {
-                MessageDTO messageDTO = new MessageDTO();
-                messageDTO.setMessage(response.getName());
-                messageDTO.setId(response.getId());
-                messageListView.createMessageWidget(messageDTO);
-                messageListView.resetTestBox();
+                routeListView.createRouteWidget(response);
+                routeListView.resetTextBox();
+            }
+        }
+        );
+    }
+
+    public void deleteRoute(final Long id) {
+        RouteRequest routeRequest = boulderLogRequestFactory.routeRequest();
+        routeRequest.deleteById(id).fire(new Receiver<Void>() {
+            @Override
+            public void onSuccess(Void response) {
+                routeListView.removeRouteWidgetById(id);
             }
         }
         );

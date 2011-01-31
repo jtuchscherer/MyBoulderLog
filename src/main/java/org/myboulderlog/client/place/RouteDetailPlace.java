@@ -3,10 +3,10 @@ package org.myboulderlog.client.place;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
-public class MessageDetailPlace extends Place {
+public class RouteDetailPlace extends Place {
     private String messageName;
 
-    public MessageDetailPlace(String token) {
+    public RouteDetailPlace(String token) {
         this.messageName = token;
     }
 
@@ -14,13 +14,13 @@ public class MessageDetailPlace extends Place {
         return messageName;
     }
 
-    public static class Tokenizer implements PlaceTokenizer<MessageDetailPlace> {
-        public String getToken(MessageDetailPlace place) {
+    public static class Tokenizer implements PlaceTokenizer<RouteDetailPlace> {
+        public String getToken(RouteDetailPlace place) {
             return place.getMessageName();
         }
 
-        public MessageDetailPlace getPlace(String token) {
-            return new MessageDetailPlace(token);
+        public RouteDetailPlace getPlace(String token) {
+            return new RouteDetailPlace(token);
         }
     }
 

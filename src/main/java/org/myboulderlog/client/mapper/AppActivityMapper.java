@@ -7,8 +7,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.myboulderlog.client.activity.MessageDetailActivity;
 import org.myboulderlog.client.activity.MessageListActivity;
-import org.myboulderlog.client.place.MessageDetailPlace;
 import org.myboulderlog.client.place.MessageListPlace;
+import org.myboulderlog.client.place.RouteDetailPlace;
 
 public class AppActivityMapper implements ActivityMapper {
 
@@ -29,8 +29,8 @@ public class AppActivityMapper implements ActivityMapper {
         // Beg and ye shall receive Gin.
         if (place instanceof MessageListPlace) {
             return messageListActivityProvider.get().withPlace((MessageListPlace) place);
-        } else if (place instanceof MessageDetailPlace) {
-            return messageDetailActivityProvider.get().withPlace((MessageDetailPlace) place);
+        } else if (place instanceof RouteDetailPlace) {
+            return messageDetailActivityProvider.get().withPlace((RouteDetailPlace) place);
         }
         return null;
     }

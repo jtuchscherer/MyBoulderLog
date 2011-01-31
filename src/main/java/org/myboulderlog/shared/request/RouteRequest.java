@@ -16,4 +16,5 @@ public interface RouteRequest extends RequestContext {
 
     Request<List<RouteProxy>> listAll();
 
+    Request<Void> deleteById(Long id);
 }

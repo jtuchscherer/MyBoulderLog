@@ -1,13 +1,13 @@
-<!-- MessageListViewImpl.ui.xml -->
+<!-- RouteListViewImpl.ui.xml -->
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-    <g:VerticalPanel ui:field="messageListPanel">
+    <g:VerticalPanel ui:field="routeListPanel">
         <g:Label>My Boulder log</g:Label>
         <g:HorizontalPanel>
-            <g:TextBox ui:field="newMessageTextBox"/>
-            <g:Button ui:field="addMessageButton">Add</g:Button>
+            <g:TextBox ui:field="newRouteTextBox"/>
+            <g:Button ui:field="addRouteButton">Add</g:Button>
         </g:HorizontalPanel>
     </g:VerticalPanel>
 

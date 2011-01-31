@@ -10,7 +10,6 @@ import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import org.myboulderlog.client.ApplicationUtils;
 import org.myboulderlog.client.activity.MessageDetailActivity;
 import org.myboulderlog.client.activity.MessageListActivity;
 import org.myboulderlog.client.mapper.AppActivityMapper;
@@ -19,17 +18,15 @@ import org.myboulderlog.client.place.MessageListPlace;
 import org.myboulderlog.client.view.MainView;
 import org.myboulderlog.client.view.MessageDetailView;
 import org.myboulderlog.client.view.MessageDetailViewImpl;
-import org.myboulderlog.client.view.MessageListView;
-import org.myboulderlog.client.view.MessageListViewImpl;
+import org.myboulderlog.client.view.RouteListView;
+import org.myboulderlog.client.view.RouteListViewImpl;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 
 public class ApplicationClientModule extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(ApplicationUtils.class).in(Singleton.class);
-
         bind(MainView.class);
-        bind(MessageListView.class).to(MessageListViewImpl.class).in(Singleton.class);
+        bind(RouteListView.class).to(RouteListViewImpl.class).in(Singleton.class);
         bind(MessageDetailView.class).to(MessageDetailViewImpl.class).in(Singleton.class);
         bind(MessageListActivity.class);
         bind(MessageDetailActivity.class);

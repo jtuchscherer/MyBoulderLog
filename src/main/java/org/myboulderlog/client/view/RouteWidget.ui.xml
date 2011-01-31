@@ -1,10 +1,10 @@
-<!-- MessageWidget.ui.xml -->
+<!-- RouteWidget.ui.xml -->
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
     <g:HorizontalPanel>
-        <g:Anchor ui:field="label" styleName="messageName"/>
+        <g:Anchor ui:field="label" styleName="routeName"/>
         <g:Anchor ui:field="anchor" styleName="deleteLink">Delete</g:Anchor>
     </g:HorizontalPanel>
 
