@@ -7,7 +7,7 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
-import org.myboulderlog.client.place.MessageListPlace;
+import org.myboulderlog.client.place.RouteListPlace;
 import org.myboulderlog.client.view.RouteListView;
 import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
@@ -15,14 +15,14 @@ import org.myboulderlog.shared.request.RouteRequest;
 
 import java.util.List;
 
-public class MessageListActivity extends AbstractActivity implements RouteListView.Presenter {
+public class RouteListActivity extends AbstractActivity implements RouteListView.Presenter {
 
     private RouteListView routeListView;
     PlaceController placeController;
     private BoulderLogRequestFactory boulderLogRequestFactory;
 
     @Inject
-    public MessageListActivity(
+    public RouteListActivity(
             RouteListView routeListView,
             PlaceController placeController,
             BoulderLogRequestFactory boulderLogRequestFactory)
@@ -32,7 +32,7 @@ public class MessageListActivity extends AbstractActivity implements RouteListVi
         this.boulderLogRequestFactory = boulderLogRequestFactory;
     }
 
-    public MessageListActivity withPlace(MessageListPlace place) {
+    public RouteListActivity withPlace(RouteListPlace place) {
         return this;
     }
 
@@ -65,9 +65,9 @@ public class MessageListActivity extends AbstractActivity implements RouteListVi
 
     public void addRoute(String text) {
         RouteRequest routeRequest = boulderLogRequestFactory.routeRequest();
-        RouteProxy newEmployee = routeRequest.create(RouteProxy.class);
-        newEmployee.setName(text);
-        routeRequest.saveAndReturn(newEmployee).fire(new Receiver<RouteProxy>() {
+        RouteProxy newRoute = routeRequest.create(RouteProxy.class);
+        newRoute.setName(text);
+        routeRequest.saveAndReturn(newRoute).fire(new Receiver<RouteProxy>() {
             @Override
             public void onSuccess(RouteProxy response) {
                 routeListView.createRouteWidget(response);

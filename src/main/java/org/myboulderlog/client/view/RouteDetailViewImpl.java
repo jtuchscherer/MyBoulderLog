@@ -5,16 +5,16 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public class MessageDetailViewImpl extends Composite implements MessageDetailView {
+public class RouteDetailViewImpl extends Composite implements RouteDetailView {
     SimplePanel viewPanel = new SimplePanel();
-    Element messageDetailSpan = DOM.createSpan();
+    Element routeDetailSpan = DOM.createSpan();
 
-    public MessageDetailViewImpl() {
-        viewPanel.getElement().appendChild(messageDetailSpan);
+    public RouteDetailViewImpl() {
+        viewPanel.getElement().appendChild(routeDetailSpan);
         initWidget(viewPanel);
     }
 
     public void setName(String name) {
-        messageDetailSpan.setInnerText(name);
+        routeDetailSpan.setInnerText(name);
     }
 }
