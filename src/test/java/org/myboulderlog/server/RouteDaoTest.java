@@ -2,15 +2,15 @@ package org.myboulderlog.server;
 
 
 import com.googlecode.objectify.ObjectifyService;
-import org.junit.Before;
-import org.junit.Test;
 import org.myboulderlog.server.dao.objectify.RouteDAOImpl;
 import org.myboulderlog.server.model.Route;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Tests {@link org.myboulderlog.server.dao.objectify.RouteDAOImpl} class.
@@ -24,7 +24,7 @@ public class RouteDaoTest extends LocalDatastoreTest {
     /**
      * @see LocalDatastoreTest#setUp()
      */
-    @Before
+    @BeforeClass
     @Override
     public void setUp() {
         super.setUp();

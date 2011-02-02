@@ -1,10 +1,9 @@
 package org.myboulderlog.server;
 
-import org.junit.After;
-import org.junit.Before;
-
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 /**
  * Performs datastore setup, as described <a
@@ -21,7 +20,7 @@ public abstract class LocalDatastoreTest {
     /**
      *
      */
-    @Before
+    @BeforeClass
     public void setUp() {
         this.helper.setUp();
     }
@@ -29,7 +28,7 @@ public abstract class LocalDatastoreTest {
     /**
      * @see LocalServiceTest#tearDown()
      */
-    @After
+    @AfterClass
     public void tearDown() {
         this.helper.tearDown();
     }
