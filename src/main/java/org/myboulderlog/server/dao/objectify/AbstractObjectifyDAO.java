@@ -18,12 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Generic DAO for use with Objectify
- *
- * @param <T>
- * @author turbomanage
- */
 public abstract class AbstractObjectifyDAO<T> extends DAOBase implements AbstractDAO<T> {
 
     static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
