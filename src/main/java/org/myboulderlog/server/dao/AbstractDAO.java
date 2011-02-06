@@ -42,7 +42,7 @@ public interface AbstractDAO<T> {
 
     Key<T> key(T obj);
 
-    List<T> listChildren(Object parent);
-
-    List<Key<T>> listChildKeys(Object parent);
+//    List<T> listChildren(Object parent);
+//
+//    List<Key<T>> listChildKeys(Object parent);
 }

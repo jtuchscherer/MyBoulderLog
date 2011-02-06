@@ -129,16 +129,16 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
     }
 
     public Key<T> key(T obj) {
-        return ObjectifyService.factory().getKey(obj);
+        return fact().getKey(obj);
     }
 
-    public List<T> listChildren(Object parent) {
-        return ofy().query(this.getClazz()).ancestor(parent).list();
-    }
-
-    public List<Key<T>> listChildKeys(Object parent) {
-        return ofy().query(this.getClazz()).ancestor(parent).listKeys();
-    }
+//    public List<T> listChildren(Object parent) {
+//        return ofy().query(this.getClazz()).ancestor(parent).list();
+//    }
+//
+//    public List<Key<T>> listChildKeys(Object parent) {
+//        return ofy().query(this.getClazz()).ancestor(parent).listKeys();
+//    }
 
     protected Query<T> buildQueryByExample(T exampleObj) {
         Query<T> q = ofy().query(this.getClazz());
