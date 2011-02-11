@@ -1,26 +1,31 @@
 package org.myboulderlog.server.locator;
 
 import com.google.gwt.requestfactory.shared.Locator;
+import com.google.inject.Inject;
 import com.googlecode.objectify.helper.DAOBase;
 import org.myboulderlog.server.model.AbstractDomainObject;
 
 public class ObjectifyLocator extends Locator<AbstractDomainObject, Long> {
 
+    private DAOBase daoBase;
+
+    @Inject
+    public ObjectifyLocator(DAOBase daoBase) {
+        this.daoBase = daoBase;
+    }
+
     @Override
     public AbstractDomainObject create(Class<? extends AbstractDomainObject> clazz) {
         try {
             return clazz.newInstance();
-        } catch (InstantiationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
-        return null;
     }
 
     @Override
     public AbstractDomainObject find(Class<? extends AbstractDomainObject> clazz, Long id) {
-        DAOBase daoBase = new DAOBase();
         return daoBase.ofy().find(clazz, id);
     }
 
