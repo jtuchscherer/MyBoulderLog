@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class RequestFactoryInjectingModuleTest {
 
     @Test
-    public void testRequestFactoryInjectingModuleConfiguratioDoesNotThrowExceptionn() {
+    public void testRequestFactoryInjectingModuleConfigurationDoesNotThrowException() {
         RequestFactoryInjectingModule requestFactoryInjectingModule = new RequestFactoryInjectingModule("testUrl");
         requestFactoryInjectingModule.configureServlets();
     }

@@ -11,15 +11,15 @@ public interface RouteProxy extends DatastoreObjectProxy {
 
     public void setName(String name);
 
-    public Long getRating();
+    public Long getDifficultyRatingId();
 
-    public void setRating(Long rating);
+    public void setDifficultyRatingId(Long rating);
 
     public String getDescription();
 
     public void setDescription(String description);
 
-    public Long getArea();
+    public Long getAreaId();
 
-    public void setArea(Long area);
+    public void setAreaId(Long areaId);
 }

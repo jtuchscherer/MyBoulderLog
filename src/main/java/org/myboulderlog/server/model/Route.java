@@ -4,11 +4,11 @@ public class Route extends AbstractDomainObject {
 
     private String name;
 
-    private Long rating;
+    private Long difficultyRatingId;
 
     private String description;
 
-    private Long area;
+    private Long areaId;
 
 
     public String getName() {
@@ -19,12 +19,12 @@ public class Route extends AbstractDomainObject {
         this.name = name;
     }
 
-    public Long getRating() {
-        return rating;
+    public Long getDifficultyRatingId() {
+        return difficultyRatingId;
     }
 
-    public void setRating(Long rating) {
-        this.rating = rating;
+    public void setDifficultyRatingId(Long difficultyRatingId) {
+        this.difficultyRatingId = difficultyRatingId;
     }
 
     public String getDescription() {
@@ -35,11 +35,11 @@ public class Route extends AbstractDomainObject {
         this.description = description;
     }
 
-    public Long getArea() {
-        return area;
+    public Long getAreaId() {
+        return areaId;
     }
 
-    public void setArea(Long area) {
-        this.area = area;
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
     }
 }

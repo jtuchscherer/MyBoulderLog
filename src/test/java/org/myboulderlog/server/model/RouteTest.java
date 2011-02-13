@@ -20,8 +20,8 @@ public class RouteTest {
     public void testSetRating() throws Exception {
         Route route = new Route();
         Long testRating = 1L;
-        route.setRating(testRating);
-        assertEquals(route.getRating(),testRating);
+        route.setDifficultyRatingId(testRating);
+        assertEquals(route.getDifficultyRatingId(),testRating);
     }
 
     @Test
@@ -36,8 +36,8 @@ public class RouteTest {
     public void testSetArea() throws Exception {
         Route route = new Route();
         Long testArea = 1L;
-        route.setArea(testArea);
-        assertEquals(route.getArea(),testArea);
+        route.setAreaId(testArea);
+        assertEquals(route.getAreaId(),testArea);
     }
 
     @Test

@@ -199,11 +199,11 @@ public class AbstractObjectifyDAOTest extends LocalDatastoreTest {
         long rating = random.nextLong();
 
         Route route1 = new Route();
-        route1.setRating(rating);
+        route1.setDifficultyRatingId(rating);
         this.routeDAOImpl.put(route1);
 
         Route route2 = new Route();
-        route2.setRating(rating);
+        route2.setDifficultyRatingId(rating);
         this.routeDAOImpl.put(route2);
 
         List<Route> returnedRoutes = this.routeDAOImpl.listByProperty("rating", rating);
@@ -238,15 +238,15 @@ public class AbstractObjectifyDAOTest extends LocalDatastoreTest {
         long area = random.nextLong();
 
         Route route = new Route();
-        route.setRating(rating);
+        route.setDifficultyRatingId(rating);
         route.setDescription(descr);
-        route.setArea(area);
+        route.setAreaId(area);
         this.routeDAOImpl.put(route);
 
         Route example = new Route();
-        example.setRating(rating);
+        example.setDifficultyRatingId(rating);
         example.setDescription(descr);
-        example.setArea(area);
+        example.setAreaId(area);
 
         Route result = this.routeDAOImpl.getByExample(example);
 
@@ -261,21 +261,21 @@ public class AbstractObjectifyDAOTest extends LocalDatastoreTest {
         long area = random.nextLong();
 
         Route route = new Route();
-        route.setRating(rating);
+        route.setDifficultyRatingId(rating);
         route.setDescription(descr);
-        route.setArea(area);
+        route.setAreaId(area);
         this.routeDAOImpl.put(route);
 
         Route route2 = new Route();
-        route2.setRating(rating);
+        route2.setDifficultyRatingId(rating);
         route2.setDescription(descr);
-        route2.setArea(area);
+        route2.setAreaId(area);
         this.routeDAOImpl.put(route2);
 
         Route example = new Route();
-        example.setRating(rating);
+        example.setDifficultyRatingId(rating);
         example.setDescription(descr);
-        example.setArea(area);
+        example.setAreaId(area);
 
         try {
             this.routeDAOImpl.getByExample(example);
@@ -292,21 +292,21 @@ public class AbstractObjectifyDAOTest extends LocalDatastoreTest {
         long area = 2L;
 
         Route route = new Route();
-        route.setRating(rating);
+        route.setDifficultyRatingId(rating);
         route.setDescription(descr);
-        route.setArea(area);
+        route.setAreaId(area);
         this.routeDAOImpl.put(route);
 
         Route route2 = new Route();
-        route2.setRating(rating);
+        route2.setDifficultyRatingId(rating);
         route2.setDescription(descr);
-        route2.setArea(area);
+        route2.setAreaId(area);
         this.routeDAOImpl.put(route2);
 
         Route example = new Route();
-        example.setRating(rating);
+        example.setDifficultyRatingId(rating);
         example.setDescription(descr);
-        example.setArea(area);
+        example.setAreaId(area);
 
         List<Route> result = this.routeDAOImpl.listByExample(example);
 
