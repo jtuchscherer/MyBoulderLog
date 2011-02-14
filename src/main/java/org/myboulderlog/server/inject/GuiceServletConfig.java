@@ -25,7 +25,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
     private Logger logger = LoggerFactory.getLogger(GuiceServletConfig.class);
 
     protected Injector getInjector() {
-        return Guice.createInjector(new RequestFactoryInjectingModule("/myboulderlog/gwtRequest"),
+        return Guice.createInjector(new RequestFactoryInjectingModule("/gwtRequest"),
                                     new MyBoulderLogServletModule(),
                                     new MyBoulderLogModule()
         );

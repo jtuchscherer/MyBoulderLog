@@ -5,7 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.myboulderlog.client.inject.ApplicationGinjector;
 
-public class RouteEntryPoint implements EntryPoint {
+public class MyBoulderLogEntryPoint implements EntryPoint {
 
     /**
      * This is the entry point method.

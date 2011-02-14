@@ -14,10 +14,6 @@
         <listener-class>org.myboulderlog.server.inject.GuiceServletConfig</listener-class>
     </listener>
 
-    <!--<listener>-->
-        <!--<listener-class>org.myboulderlog.web.ContextInitializer</listener-class>-->
-    <!--</listener>-->
-
     <filter>
         <filter-name>guiceFilter</filter-name>
         <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
