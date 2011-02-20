@@ -1,9 +1,9 @@
-package org.myboulderlog.client.entrypoints;
+package org.myboulderlog.client.mainapp.entrypoints;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.myboulderlog.client.inject.ApplicationGinjector;
+import org.myboulderlog.client.mainapp.inject.ApplicationGinjector;
 
 public class MyBoulderLogEntryPoint implements EntryPoint {
 

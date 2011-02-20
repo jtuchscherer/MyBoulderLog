@@ -1,4 +1,4 @@
-package org.myboulderlog.client.view;
+package org.myboulderlog.client.mainapp.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

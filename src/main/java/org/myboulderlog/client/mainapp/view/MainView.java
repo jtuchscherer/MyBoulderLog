@@ -1,11 +1,11 @@
-package org.myboulderlog.client.view;
+package org.myboulderlog.client.mainapp.view;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.myboulderlog.client.mapper.AppActivityMapper;
+import org.myboulderlog.client.mainapp.mapper.AppActivityMapper;
 
 @Singleton
 public class MainView extends SimplePanel {

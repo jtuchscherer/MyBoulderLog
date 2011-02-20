@@ -1,4 +1,4 @@
-package org.myboulderlog.client.place;
+package org.myboulderlog.client.mainapp.place;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;

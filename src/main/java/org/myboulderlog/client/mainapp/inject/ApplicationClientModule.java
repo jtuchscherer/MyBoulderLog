@@ -1,4 +1,4 @@
-package org.myboulderlog.client.inject;
+package org.myboulderlog.client.mainapp.inject;
 
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
@@ -10,16 +10,16 @@ import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import org.myboulderlog.client.activity.RouteDetailActivity;
-import org.myboulderlog.client.activity.RouteListActivity;
-import org.myboulderlog.client.mapper.AppActivityMapper;
-import org.myboulderlog.client.mapper.AppPlaceHistoryMapper;
-import org.myboulderlog.client.place.RouteListPlace;
-import org.myboulderlog.client.view.MainView;
-import org.myboulderlog.client.view.RouteDetailView;
-import org.myboulderlog.client.view.RouteDetailViewImpl;
-import org.myboulderlog.client.view.RouteListView;
-import org.myboulderlog.client.view.RouteListViewImpl;
+import org.myboulderlog.client.mainapp.activity.RouteDetailActivity;
+import org.myboulderlog.client.mainapp.activity.RouteListActivity;
+import org.myboulderlog.client.mainapp.mapper.AppActivityMapper;
+import org.myboulderlog.client.mainapp.mapper.AppPlaceHistoryMapper;
+import org.myboulderlog.client.mainapp.place.RouteListPlace;
+import org.myboulderlog.client.mainapp.view.MainView;
+import org.myboulderlog.client.mainapp.view.RouteDetailView;
+import org.myboulderlog.client.mainapp.view.RouteDetailViewImpl;
+import org.myboulderlog.client.mainapp.view.RouteListView;
+import org.myboulderlog.client.mainapp.view.RouteListViewImpl;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 
 public class ApplicationClientModule extends AbstractGinModule {

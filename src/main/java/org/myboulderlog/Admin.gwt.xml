@@ -23,12 +23,12 @@
     <set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED"/>
     <set-property name="gwt.logging.logLevel" value="FINE"/>
 
-    <entry-point class='org.myboulderlog.client.entrypoints.AdminEntryPoint'/>
+    <entry-point class='org.myboulderlog.client.admin.entrypoints.AdminEntryPoint'/>
 
     <!-- Specify the application specific style sheet.              -->
     <stylesheet src='css/Admin.css'/>
 
-    <source path='client'/>
+    <source path='client/admin'/>
     <source path='shared'/>
 
 </module>

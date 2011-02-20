@@ -1,14 +1,14 @@
-package org.myboulderlog.client.mapper;
+package org.myboulderlog.client.mainapp.mapper;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.myboulderlog.client.activity.RouteDetailActivity;
-import org.myboulderlog.client.activity.RouteListActivity;
-import org.myboulderlog.client.place.RouteListPlace;
-import org.myboulderlog.client.place.RouteDetailPlace;
+import org.myboulderlog.client.mainapp.activity.RouteDetailActivity;
+import org.myboulderlog.client.mainapp.activity.RouteListActivity;
+import org.myboulderlog.client.mainapp.place.RouteListPlace;
+import org.myboulderlog.client.mainapp.place.RouteDetailPlace;
 
 public class AppActivityMapper implements ActivityMapper {
 

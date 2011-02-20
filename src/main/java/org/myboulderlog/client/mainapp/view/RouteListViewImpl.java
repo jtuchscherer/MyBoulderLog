@@ -1,4 +1,4 @@
-package org.myboulderlog.client.view;
+package org.myboulderlog.client.mainapp.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.myboulderlog.client.place.RouteDetailPlace;
+import org.myboulderlog.client.mainapp.place.RouteDetailPlace;
 import org.myboulderlog.shared.proxy.RouteProxy;
 
 import java.util.HashMap;

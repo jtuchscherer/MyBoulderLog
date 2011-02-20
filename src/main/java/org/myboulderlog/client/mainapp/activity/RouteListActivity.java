@@ -1,4 +1,4 @@
-package org.myboulderlog.client.activity;
+package org.myboulderlog.client.mainapp.activity;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -7,8 +7,8 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
-import org.myboulderlog.client.place.RouteListPlace;
-import org.myboulderlog.client.view.RouteListView;
+import org.myboulderlog.client.mainapp.place.RouteListPlace;
+import org.myboulderlog.client.mainapp.view.RouteListView;
 import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.BoulderLogRequestFactory;
 import org.myboulderlog.shared.request.RouteRequest;

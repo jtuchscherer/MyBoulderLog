@@ -1,4 +1,4 @@
-package org.myboulderlog.client.view;
+package org.myboulderlog.client.mainapp.view;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;

@@ -1,4 +1,4 @@
-package org.myboulderlog.client.entrypoints;
+package org.myboulderlog.client.admin.entrypoints;
 
 import com.google.gwt.core.client.EntryPoint;
 
