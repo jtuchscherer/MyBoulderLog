@@ -1,0 +1,13 @@
+<!-- RouteListViewImpl.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:VerticalPanel>
+        <g:Anchor ui:field="gyms">Gym Administration</g:Anchor>
+        <g:Anchor ui:field="areas">Areas Administration</g:Anchor>
+        <g:Anchor ui:field="routes">Routes Administration</g:Anchor>
+        <g:Anchor ui:field="users">User Administration</g:Anchor>
+    </g:VerticalPanel>
+
+</ui:UiBinder>

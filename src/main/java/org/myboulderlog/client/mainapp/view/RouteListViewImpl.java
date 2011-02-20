@@ -37,7 +37,7 @@ public class RouteListViewImpl extends Composite implements RouteListView {
     private static MainApplicationWidgetUiBinder uiBinder = GWT.create(MainApplicationWidgetUiBinder.class);
 
     @UiField
-    VerticalPanel routeListPanel = new VerticalPanel();
+    VerticalPanel routeListPanel;
 
     @UiField
     TextBox newRouteTextBox;

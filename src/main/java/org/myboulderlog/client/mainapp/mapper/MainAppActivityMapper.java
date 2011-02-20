@@ -10,13 +10,13 @@ import org.myboulderlog.client.mainapp.activity.RouteListActivity;
 import org.myboulderlog.client.mainapp.place.RouteListPlace;
 import org.myboulderlog.client.mainapp.place.RouteDetailPlace;
 
-public class AppActivityMapper implements ActivityMapper {
+public class MainAppActivityMapper implements ActivityMapper {
 
     Provider<RouteListActivity> routeListActivityProvider;
     Provider<RouteDetailActivity> routeDetailActivityProvider;
 
     @Inject
-    public AppActivityMapper(
+    public MainAppActivityMapper(
             final Provider<RouteListActivity> routeListActivityProvider,
             final Provider<RouteDetailActivity> routeDetailActivityProvider)
     {

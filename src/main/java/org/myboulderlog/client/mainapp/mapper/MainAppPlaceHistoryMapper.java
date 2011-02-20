@@ -6,5 +6,5 @@ import org.myboulderlog.client.mainapp.place.RouteListPlace;
 import org.myboulderlog.client.mainapp.place.RouteDetailPlace;
 
 @WithTokenizers({RouteListPlace.Tokenizer.class, RouteDetailPlace.Tokenizer.class})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
+public interface MainAppPlaceHistoryMapper extends PlaceHistoryMapper {
 }
