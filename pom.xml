@@ -19,6 +19,12 @@
         </repository>
 
         <repository>
+            <id>gin-stage-repo</id>
+            <name>Gin Staged Repository at Sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/comgooglecodegwtinject-220/</url>
+        </repository>
+
+        <repository>
             <id>objectify-appengine</id>
             <name>Objectify Maven Repository</name>
             <url>http://objectify-appengine.googlecode.com/svn/maven</url>
@@ -36,7 +42,7 @@
         <pluginRepository>
             <id>maven-gwt-plugin</id>
             <name>Maven GWT</name>
-            <url>https://nexus.codehaus.org/content/repositories/orgcodehausmojo-047/</url>
+            <url>http://maven.gwt-platform.googlecode.com/hg/</url>
         </pluginRepository>
         <pluginRepository>
             <id>maven-gae-plugin-repo</id>
@@ -94,22 +100,34 @@
             <version>${gwt.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.gwt</groupId>-->
+            <!--<artifactId>gwt-dev</artifactId>-->
+            <!--<version>${gwt.version}</version>-->
+            <!--<type>jar</type>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
 
         <!--  Guice dependencies (from google repo) -->
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>2.0</version>
+            <version>${guice.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assisted-inject</artifactId>
             <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-            <version>1.0</version>
+            <version>1.5</version>
         </dependency>
 
         <!-- Gwt command/dispatch dependency -->
@@ -223,7 +241,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>2.1.0-1</version>
+                <version>2.2.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -315,7 +333,9 @@
     <properties>
 
         <!-- convenience to define GWT version in one place -->
-        <gwt.version>2.1.1</gwt.version>
+        <gwt.version>2.2.0</gwt.version>
+        <!-- convenience to define GWT version in one place -->
+        <guice.version>3.0-rc2</guice.version>
 
         <!--  tell the compiler we can use 1.5 -->
         <maven.compiler.source>1.5</maven.compiler.source>

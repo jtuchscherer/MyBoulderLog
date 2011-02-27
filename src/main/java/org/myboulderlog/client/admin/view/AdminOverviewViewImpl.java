@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import org.myboulderlog.client.admin.place.AdminOverviewPlace;
+import org.myboulderlog.client.admin.place.GymListPlace;
 
 public class AdminOverviewViewImpl extends Composite implements AdminOverviewView {
 
@@ -48,7 +49,7 @@ public class AdminOverviewViewImpl extends Composite implements AdminOverviewVie
 
     @UiHandler("gyms")
     void onGymsClick(ClickEvent event) {
-        presenter.goTo(new AdminOverviewPlace());
+        presenter.goTo(new GymListPlace());
     }
 
     public AdminOverviewViewImpl() {
