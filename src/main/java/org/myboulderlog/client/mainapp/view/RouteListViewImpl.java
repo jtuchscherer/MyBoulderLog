@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 public class RouteListViewImpl extends Composite implements RouteListView {
 
-    private final Logger logger = Logger.getLogger("RouteListViewImpl");
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     private final Provider<RouteWidget> routeWidgetProvider;
 
@@ -92,7 +92,7 @@ public class RouteListViewImpl extends Composite implements RouteListView {
 
     public void removeRouteWidgetById(Long routeId) {
         //delete route widget from widget list
-        logger.log(Level.INFO, "Deleting widget: " + routeId);
+        logger.info("Deleting widget: " + routeId);
         routeListPanel.remove(widgetMap.get(routeId));
     }
 

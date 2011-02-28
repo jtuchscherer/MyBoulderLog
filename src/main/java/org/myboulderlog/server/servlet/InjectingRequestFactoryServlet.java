@@ -1,21 +1,22 @@
-package org.myboulderlog.server.inject;
+package org.myboulderlog.server.servlet;
 
 import com.google.gwt.requestfactory.server.DefaultExceptionHandler;
 import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.myboulderlog.server.inject.InjectingServiceLayerDecorator;
 
 /**
- * An implementation of the RequestFactoryServlet that is using Guice to inject the {@link InjectingServiceLayerDecorator}, so
- * it lets the {@link InjectingServiceLayerDecorator} to control the request processing.
+ * An implementation of the RequestFactoryServlet that is using Guice to inject the {@link org.myboulderlog.server.inject.InjectingServiceLayerDecorator}, so
+ * it lets the {@link org.myboulderlog.server.inject.InjectingServiceLayerDecorator} to control the request processing.
  * <p/>
- * This servlet is bound in the {@link RequestFactoryInjectingModule} and could be injected
+ * This servlet is bound in the {@link org.myboulderlog.server.inject.MyBoulderLogModule} and could be injected
  *
  * @author Miroslav Genov (mgenov@gmail.com)
- * @see RequestFactoryInjectingModule
+ * @see org.myboulderlog.server.inject.MyBoulderLogModule
  */
 @Singleton
-class InjectingRequestFactoryServlet extends RequestFactoryServlet {
+public class InjectingRequestFactoryServlet extends RequestFactoryServlet {
 
     private static final long serialVersionUID = -8407850949583771729L;
 

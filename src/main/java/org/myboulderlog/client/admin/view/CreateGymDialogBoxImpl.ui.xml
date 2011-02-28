@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:DialogBox>
+        <g:caption>
+            <b>Create a new gym</b>
+        </g:caption>
+        <g:HTMLPanel>
+            Body text
+            <g:Button ui:field='cancelButton'>Cancel</g:Button>
+            <g:Button ui:field='okButton'>Save</g:Button>
+        </g:HTMLPanel>
+    </g:DialogBox>
+</ui:UiBinder>

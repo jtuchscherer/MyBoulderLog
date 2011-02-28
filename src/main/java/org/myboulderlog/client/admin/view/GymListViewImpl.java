@@ -10,13 +10,12 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
-import org.myboulderlog.client.admin.place.AdminOverviewPlace;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.proxy.GymProxyKeyProvider;
 
@@ -25,6 +24,7 @@ public class GymListViewImpl extends Composite implements GymListView {
     private GymListView.Presenter presenter;
     private Column<GymProxy, String> nameColumn;
     private GymProxyKeyProvider gymProxyKeyProvider;
+    private CreateGymDialogBox createGymDialogBox;
 
     public void setPresenter(GymListView.Presenter presenter) {
         this.presenter = presenter;
@@ -44,12 +44,14 @@ public class GymListViewImpl extends Composite implements GymListView {
     private static WidgetUiBinder uiBinder = GWT.create(WidgetUiBinder.class);
 
 
+    @UiField
+    HTMLPanel container;
+
     /**
      * The main CellTable.
      */
     @UiField(provided = true)
     CellTable<GymProxy> cellTable;
-
     /**
      * The pager used to change the range of data.
      */
@@ -61,15 +63,16 @@ public class GymListViewImpl extends Composite implements GymListView {
 
     @UiHandler("createNewButton")
     void onRoutesClick(ClickEvent event) {
-        presenter.goTo(new AdminOverviewPlace());
+        createGymDialogBox.show();
     }
 
     /**
      * Initialize this example.
      */
     @Inject
-    public GymListViewImpl(GymProxyKeyProvider gymProxyKeyProvider) {
+    public GymListViewImpl(GymProxyKeyProvider gymProxyKeyProvider, CreateGymDialogBox createGymDialogBox) {
         this.gymProxyKeyProvider = gymProxyKeyProvider;
+        this.createGymDialogBox = createGymDialogBox;
         // Create a CellTable.
 
         // Set a key provider that provides a unique key for each contact. If key is

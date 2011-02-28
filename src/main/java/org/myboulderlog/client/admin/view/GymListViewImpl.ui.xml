@@ -12,7 +12,7 @@
         }
     </ui:style>
 
-    <g:HTMLPanel>
+    <g:HTMLPanel ui:field="container">
         <g:Label>List of all Gyms</g:Label>
         <g:Button ui:field="createNewButton">Add a new gym</g:Button>
         <table cellspacing='0' cellpadding='0' style='width:100%;'>

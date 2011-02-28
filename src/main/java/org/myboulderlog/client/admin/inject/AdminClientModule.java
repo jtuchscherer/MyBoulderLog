@@ -15,6 +15,8 @@ import org.myboulderlog.client.admin.mapper.AdminPlaceHistoryMapper;
 import org.myboulderlog.client.admin.place.AdminOverviewPlace;
 import org.myboulderlog.client.admin.view.AdminOverviewViewImpl;
 import org.myboulderlog.client.admin.view.AdminOverviewView;
+import org.myboulderlog.client.admin.view.CreateGymDialogBox;
+import org.myboulderlog.client.admin.view.CreateGymDialogBoxImpl;
 import org.myboulderlog.client.admin.view.GymListView;
 import org.myboulderlog.client.admin.view.GymListViewImpl;
 import org.myboulderlog.client.admin.view.MainAdminView;
@@ -28,6 +30,7 @@ public class AdminClientModule extends AbstractGinModule {
         bind(GymProxyKeyProvider.class).in(Singleton.class);
         bind(AdminOverviewView.class).to(AdminOverviewViewImpl.class).in(Singleton.class);
         bind(GymListView.class).to(GymListViewImpl.class).in(Singleton.class);
+        bind(CreateGymDialogBox.class).to(CreateGymDialogBoxImpl.class).in(Singleton.class);
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(PlaceHistoryMapper.class).to(AdminPlaceHistoryMapper.class).in(Singleton.class);
         bind(ActivityMapper.class).to(AdminActivityMapper.class).in(Singleton.class);

@@ -1,6 +1,7 @@
 package org.myboulderlog.server.inject;
 
 import org.myboulderlog.TestUtils;
+import org.myboulderlog.server.servlet.InjectingRequestFactoryServlet;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;

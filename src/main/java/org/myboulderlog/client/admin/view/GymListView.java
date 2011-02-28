@@ -12,6 +12,8 @@ public interface GymListView extends IsWidget {
 
     public interface Presenter {
         void goTo(Place place);
+
+        void createButtonClicked();
     }
 
     /**
