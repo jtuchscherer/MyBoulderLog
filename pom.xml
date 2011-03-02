@@ -19,12 +19,6 @@
         </repository>
 
         <repository>
-            <id>gin-stage-repo</id>
-            <name>Gin Staged Repository at Sonatype</name>
-            <url>https://oss.sonatype.org/content/repositories/comgooglecodegwtinject-220/</url>
-        </repository>
-
-        <repository>
             <id>objectify-appengine</id>
             <name>Objectify Maven Repository</name>
             <url>http://objectify-appengine.googlecode.com/svn/maven</url>
@@ -125,9 +119,9 @@
             <version>2.0</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.gwt.inject</groupId>
+            <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-            <version>1.5</version>
+            <version>1.5.0</version>
         </dependency>
 
         <!-- Gwt command/dispatch dependency -->
