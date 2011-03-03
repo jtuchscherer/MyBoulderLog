@@ -12,4 +12,6 @@ import java.util.List;
 @Service(value = GymDAO.class, locator = DaoServiceLocator.class)
 public interface GymListRequest extends RequestContext {
     Request<List<GymProxy>> listAll();
+
+    Request<Void> save(GymProxy newGym);
 }

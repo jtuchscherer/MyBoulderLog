@@ -32,6 +32,7 @@ public class CreateGymDialogBoxImpl extends Widget implements CreateGymDialogBox
     @UiHandler("okButton")
     void onOkClick(ClickEvent event) {
         presenter.createButtonClicked();
+        rootElement.hide();
     }
 
     public CreateGymDialogBoxImpl() {

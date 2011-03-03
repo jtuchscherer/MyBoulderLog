@@ -14,7 +14,9 @@ import org.myboulderlog.client.admin.place.GymListPlace;
 import org.myboulderlog.client.admin.view.CreateGymDialogBox;
 import org.myboulderlog.client.admin.view.GymListView;
 import org.myboulderlog.shared.proxy.GymProxy;
+import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.AdminRequestFactory;
+import org.myboulderlog.shared.request.GymListRequest;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,6 +25,7 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
 
     private PlaceController placeController;
     private CreateGymDialogBox createGymDialogBox;
+    private AdminRequestFactory adminRequestFactory;
     private GymListView gymListView;
     private GymListDataProvider gymListDataProvider;
     private Logger logger = Logger.getLogger(this.getClass().getName()) ;
@@ -70,6 +73,7 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
         this.gymListView = gymListView;
         this.placeController = placeController;
         this.createGymDialogBox = createGymDialogBox;
+        this.adminRequestFactory = adminRequestFactory;
         this.gymListDataProvider = new GymListDataProvider(adminRequestFactory);
     }
 
@@ -86,6 +90,17 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
     }
 
     public void createButtonClicked() {
-        logger.fine("createButtonclicked");
+        logger.fine("createButtonClicked");
+        GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
+        GymProxy newGym = gymListRequest.create(GymProxy.class);
+        newGym.setName("The spot");
+        gymListRequest.save(newGym).fire(new Receiver<Void>() {
+            @Override
+            public void onSuccess(Void response) {
+                gymListDataProvider.onRangeChanged(gymListView.getDataTable());
+                logger.fine("Gym created");
+            }
+        }
+        );
     }
 }
