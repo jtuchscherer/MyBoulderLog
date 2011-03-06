@@ -34,6 +34,7 @@
     <stylesheet src='/css/Admin.css'/>
 
     <source path='client/admin'/>
+    <source path='client/shared'/>
     <source path='shared'/>
 
 </module>

@@ -1,5 +1,6 @@
 package org.myboulderlog.client.admin.view;
 
+import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
@@ -13,11 +14,16 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
+import org.myboulderlog.client.admin.mapper.AdminPlaceHistoryMapper;
+import org.myboulderlog.client.admin.place.GymPreviewPlace;
+import org.myboulderlog.client.shared.view.HyperlinkCell;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.proxy.GymProxyKeyProvider;
+import org.myboulderlog.shared.request.AdminRequestFactory;
 
 public class GymListViewImpl extends Composite implements GymListView {
 
@@ -38,7 +44,7 @@ public class GymListViewImpl extends Composite implements GymListView {
         return cellTable;
     }
 
-     interface WidgetUiBinder extends UiBinder<Widget, GymListViewImpl> {
+    interface WidgetUiBinder extends UiBinder<Widget, GymListViewImpl> {
     }
 
     private static WidgetUiBinder uiBinder = GWT.create(WidgetUiBinder.class);
@@ -116,17 +122,37 @@ public class GymListViewImpl extends Composite implements GymListView {
                 return object.getName();
             }
         };
-        cellTable.addColumn(nameColumn);
         nameColumn.setFieldUpdater(new FieldUpdater<GymProxy, String>() {
             public void update(int index, GymProxy object, String value) {
-                // Called when the user changes the value.
                 object.setName(value);
-//        ContactDatabase.get().refreshDisplays();
             }
         }
         );
-        cellTable.setColumnWidth(nameColumn, 20, Style.Unit.PCT);
-
+        ActionCell<GymProxy> actionCell = new ActionCell<GymProxy>("Delete", new ActionCell.Delegate<GymProxy>() {
+            public void execute(GymProxy object) {
+                presenter.removeGym(object);
+            }
+        }
+        );
+        Column<GymProxy, GymProxy> delColumn = new Column<GymProxy, GymProxy>(actionCell) {
+            @Override
+            public GymProxy getValue(GymProxy object) {
+                return object;
+            }
+        };
+        Column<GymProxy, Hyperlink> previewLinkColumn = new Column<GymProxy, Hyperlink>(new HyperlinkCell()) {
+            @Override
+            public Hyperlink getValue(GymProxy gym) {
+                String historyToken = presenter.getHistoryToken(gym);
+                return new Hyperlink(gym.getName(), historyToken);
+            }
+        };
+        cellTable.addColumn(nameColumn, "Name");
+        cellTable.setColumnWidth(nameColumn, 60, Style.Unit.PCT);
+        cellTable.addColumn(delColumn, "Delete");
+        cellTable.setColumnWidth(delColumn, 20, Style.Unit.PCT);
+        cellTable.addColumn(previewLinkColumn,"Preview");
+        cellTable.setColumnWidth(previewLinkColumn, 20, Style.Unit.PCT);
     }
 
     /**

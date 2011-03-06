@@ -14,4 +14,6 @@ public interface GymListRequest extends RequestContext {
     Request<List<GymProxy>> listAll();
 
     Request<Void> save(GymProxy newGym);
+
+    Request<Void> remove(GymProxy gymProxy);
 }

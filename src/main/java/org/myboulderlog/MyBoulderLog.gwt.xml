@@ -35,5 +35,6 @@
     <stylesheet src='/css/MyBoulderLog.css'/>
 
     <source path='client/mainapp'/>
+    <source path='client/shared'/>
     <source path='shared'/>
 </module>

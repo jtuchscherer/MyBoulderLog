@@ -8,4 +8,8 @@ public class GymDAOImpl extends AbstractObjectifyDAO<Gym> implements GymDAO {
     public void save(Gym route) {
         this.put(route);
     }
+
+    public void remove(Gym gym) {
+        this.delete(gym);
+    }
 }

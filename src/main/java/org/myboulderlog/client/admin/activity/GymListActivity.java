@@ -4,6 +4,7 @@ import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -11,10 +12,10 @@ import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
 import org.myboulderlog.client.admin.place.GymListPlace;
+import org.myboulderlog.client.admin.place.GymPreviewPlace;
 import org.myboulderlog.client.admin.view.CreateGymDialogBox;
 import org.myboulderlog.client.admin.view.GymListView;
 import org.myboulderlog.shared.proxy.GymProxy;
-import org.myboulderlog.shared.proxy.RouteProxy;
 import org.myboulderlog.shared.request.AdminRequestFactory;
 import org.myboulderlog.shared.request.GymListRequest;
 
@@ -26,9 +27,10 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
     private PlaceController placeController;
     private CreateGymDialogBox createGymDialogBox;
     private AdminRequestFactory adminRequestFactory;
+    private PlaceHistoryMapper adminPlaceHistoryMapper;
     private GymListView gymListView;
     private GymListDataProvider gymListDataProvider;
-    private Logger logger = Logger.getLogger(this.getClass().getName()) ;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public GymListActivity withPlace(GymListPlace place) {
         return this;
@@ -68,12 +70,14 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
             PlaceController placeController,
             GymListView gymListView,
             CreateGymDialogBox createGymDialogBox,
-            AdminRequestFactory adminRequestFactory)
+            AdminRequestFactory adminRequestFactory,
+            PlaceHistoryMapper adminPlaceHistoryMapper)
     {
         this.gymListView = gymListView;
         this.placeController = placeController;
         this.createGymDialogBox = createGymDialogBox;
         this.adminRequestFactory = adminRequestFactory;
+        this.adminPlaceHistoryMapper = adminPlaceHistoryMapper;
         this.gymListDataProvider = new GymListDataProvider(adminRequestFactory);
     }
 
@@ -102,5 +106,22 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
             }
         }
         );
+    }
+
+    public void removeGym(GymProxy gymProxy) {
+        GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
+        gymListRequest.remove(gymProxy).fire(new Receiver<Void>() {
+            @Override
+            public void onSuccess(Void response) {
+                gymListDataProvider.onRangeChanged(gymListView.getDataTable());
+                logger.fine("Gym deleted");
+            }
+        }
+        );
+    }
+
+    public String getHistoryToken(GymProxy gym) {
+        String proxyToken = adminRequestFactory.getHistoryToken(gym.stableId());
+        return adminPlaceHistoryMapper.getToken(new GymPreviewPlace(proxyToken));
     }
 }
