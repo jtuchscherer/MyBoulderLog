@@ -18,12 +18,9 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
-import org.myboulderlog.client.admin.mapper.AdminPlaceHistoryMapper;
-import org.myboulderlog.client.admin.place.GymPreviewPlace;
 import org.myboulderlog.client.shared.view.HyperlinkCell;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.proxy.GymProxyKeyProvider;
-import org.myboulderlog.shared.request.AdminRequestFactory;
 
 public class GymListViewImpl extends Composite implements GymListView {
 
@@ -31,6 +28,7 @@ public class GymListViewImpl extends Composite implements GymListView {
     private Column<GymProxy, String> nameColumn;
     private GymProxyKeyProvider gymProxyKeyProvider;
     private CreateGymDialogBox createGymDialogBox;
+    private RatingSystemDialogBox ratingSystemDialog;
 
     public void setPresenter(GymListView.Presenter presenter) {
         this.presenter = presenter;
@@ -76,9 +74,14 @@ public class GymListViewImpl extends Composite implements GymListView {
      * Initialize this example.
      */
     @Inject
-    public GymListViewImpl(GymProxyKeyProvider gymProxyKeyProvider, CreateGymDialogBox createGymDialogBox) {
+    public GymListViewImpl(
+            GymProxyKeyProvider gymProxyKeyProvider,
+            CreateGymDialogBox createGymDialogBox,
+            RatingSystemDialogBox ratingSystemDialogBox)
+    {
         this.gymProxyKeyProvider = gymProxyKeyProvider;
         this.createGymDialogBox = createGymDialogBox;
+        this.ratingSystemDialog = ratingSystemDialogBox;
         // Create a CellTable.
 
         // Set a key provider that provides a unique key for each contact. If key is
@@ -128,13 +131,26 @@ public class GymListViewImpl extends Composite implements GymListView {
             }
         }
         );
-        ActionCell<GymProxy> actionCell = new ActionCell<GymProxy>("Delete", new ActionCell.Delegate<GymProxy>() {
-            public void execute(GymProxy object) {
-                presenter.removeGym(object);
+        ActionCell<GymProxy> deleteButtonCell = new ActionCell<GymProxy>("Delete", new ActionCell.Delegate<GymProxy>() {
+            public void execute(GymProxy gym) {
+                presenter.removeGym(gym);
             }
         }
         );
-        Column<GymProxy, GymProxy> delColumn = new Column<GymProxy, GymProxy>(actionCell) {
+        Column<GymProxy, GymProxy> delColumn = new Column<GymProxy, GymProxy>(deleteButtonCell) {
+            @Override
+            public GymProxy getValue(GymProxy gym) {
+                return gym;
+            }
+        };
+        ActionCell<GymProxy> ratingSystemButtonCell =
+                new ActionCell<GymProxy>("Setup Rating System", new ActionCell.Delegate<GymProxy>() {
+                    public void execute(GymProxy gym) {
+                        ratingSystemDialog.show(gym);
+                    }
+                }
+                );
+        Column<GymProxy, GymProxy> ratingSystemLinkColumn = new Column<GymProxy, GymProxy>(ratingSystemButtonCell) {
             @Override
             public GymProxy getValue(GymProxy object) {
                 return object;
@@ -148,10 +164,12 @@ public class GymListViewImpl extends Composite implements GymListView {
             }
         };
         cellTable.addColumn(nameColumn, "Name");
-        cellTable.setColumnWidth(nameColumn, 60, Style.Unit.PCT);
+        cellTable.setColumnWidth(nameColumn, 40, Style.Unit.PCT);
         cellTable.addColumn(delColumn, "Delete");
         cellTable.setColumnWidth(delColumn, 20, Style.Unit.PCT);
-        cellTable.addColumn(previewLinkColumn,"Preview");
+        cellTable.addColumn(ratingSystemLinkColumn, "Rating System");
+        cellTable.setColumnWidth(ratingSystemLinkColumn, 20, Style.Unit.PCT);
+        cellTable.addColumn(previewLinkColumn, "Preview");
         cellTable.setColumnWidth(previewLinkColumn, 20, Style.Unit.PCT);
     }
 
