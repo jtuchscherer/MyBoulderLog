@@ -18,6 +18,11 @@ public class CreateGymDialogBoxImpl extends Widget implements CreateGymDialogBox
 
     private static CreateGymDialogBoxUiBinder ourUiBinder = GWT.create(CreateGymDialogBoxUiBinder.class);
 
+
+    @UiField
+    GymEditor gymEditor;
+
+
     @UiField
     Button cancelButton;
 
