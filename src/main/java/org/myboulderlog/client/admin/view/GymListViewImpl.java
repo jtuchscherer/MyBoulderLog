@@ -27,7 +27,7 @@ public class GymListViewImpl extends Composite implements GymListView {
     private GymListView.Presenter presenter;
     private Column<GymProxy, String> nameColumn;
     private GymProxyKeyProvider gymProxyKeyProvider;
-    private CreateGymDialogBox createGymDialogBox;
+    private EditCreateGymDialogBox editCreateGymDialogBox;
     private RatingSystemDialogBox ratingSystemDialog;
 
     public void setPresenter(GymListView.Presenter presenter) {
@@ -67,7 +67,7 @@ public class GymListViewImpl extends Composite implements GymListView {
 
     @UiHandler("createNewButton")
     void onRoutesClick(ClickEvent event) {
-        createGymDialogBox.show();
+        presenter.openNewGymDialog();
     }
 
     /**
@@ -76,11 +76,11 @@ public class GymListViewImpl extends Composite implements GymListView {
     @Inject
     public GymListViewImpl(
             GymProxyKeyProvider gymProxyKeyProvider,
-            CreateGymDialogBox createGymDialogBox,
+            EditCreateGymDialogBox editCreateGymDialogBox,
             RatingSystemDialogBox ratingSystemDialogBox)
     {
         this.gymProxyKeyProvider = gymProxyKeyProvider;
-        this.createGymDialogBox = createGymDialogBox;
+        this.editCreateGymDialogBox = editCreateGymDialogBox;
         this.ratingSystemDialog = ratingSystemDialogBox;
         // Create a CellTable.
 
@@ -143,6 +143,18 @@ public class GymListViewImpl extends Composite implements GymListView {
                 return gym;
             }
         };
+        ActionCell<GymProxy> editButtonCell = new ActionCell<GymProxy>("Edit", new ActionCell.Delegate<GymProxy>() {
+            public void execute(GymProxy gym) {
+                presenter.editGym(gym);
+            }
+        }
+        );
+        Column<GymProxy, GymProxy> editColumn = new Column<GymProxy, GymProxy>(editButtonCell) {
+            @Override
+            public GymProxy getValue(GymProxy gym) {
+                return gym;
+            }
+        };
         ActionCell<GymProxy> ratingSystemButtonCell =
                 new ActionCell<GymProxy>("Setup Rating System", new ActionCell.Delegate<GymProxy>() {
                     public void execute(GymProxy gym) {
@@ -166,7 +178,9 @@ public class GymListViewImpl extends Composite implements GymListView {
         cellTable.addColumn(nameColumn, "Name");
         cellTable.setColumnWidth(nameColumn, 40, Style.Unit.PCT);
         cellTable.addColumn(delColumn, "Delete");
-        cellTable.setColumnWidth(delColumn, 20, Style.Unit.PCT);
+        cellTable.setColumnWidth(delColumn, 10, Style.Unit.PCT);
+        cellTable.addColumn(editColumn, "Edit");
+        cellTable.setColumnWidth(editColumn, 10, Style.Unit.PCT);
         cellTable.addColumn(ratingSystemLinkColumn, "Rating System");
         cellTable.setColumnWidth(ratingSystemLinkColumn, 20, Style.Unit.PCT);
         cellTable.addColumn(previewLinkColumn, "Preview");

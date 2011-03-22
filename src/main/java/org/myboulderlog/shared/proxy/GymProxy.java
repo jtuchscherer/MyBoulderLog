@@ -10,5 +10,9 @@ public interface GymProxy extends DatastoreObjectProxy {
 
     public void setName(String value);
 
+    public String getDescription();
+
+    public void setDescription(String value);
+
     public Long getId();
 }

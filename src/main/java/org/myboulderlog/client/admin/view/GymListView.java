@@ -5,6 +5,7 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.view.client.HasData;
 import org.myboulderlog.shared.proxy.GymProxy;
+import org.myboulderlog.shared.request.AdminRequestFactory;
 
 public interface GymListView extends IsWidget {
 
@@ -18,6 +19,12 @@ public interface GymListView extends IsWidget {
         void removeGym(GymProxy gymProxy);
 
         String getHistoryToken(GymProxy gym);
+
+        void editGym(GymProxy gym);
+
+        AdminRequestFactory getRequestFactory();
+
+        void openNewGymDialog();
     }
 
     /**

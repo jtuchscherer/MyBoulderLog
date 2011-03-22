@@ -7,13 +7,14 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
 import org.myboulderlog.client.admin.place.GymListPlace;
 import org.myboulderlog.client.admin.place.GymPreviewPlace;
-import org.myboulderlog.client.admin.view.CreateGymDialogBox;
+import org.myboulderlog.client.admin.view.EditCreateGymDialogBox;
 import org.myboulderlog.client.admin.view.GymListView;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.request.AdminRequestFactory;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 public class GymListActivity extends AbstractActivity implements GymListView.Presenter {
 
     private PlaceController placeController;
-    private CreateGymDialogBox createGymDialogBox;
+    private EditCreateGymDialogBox editCreateGymDialogBox;
     private AdminRequestFactory adminRequestFactory;
     private PlaceHistoryMapper adminPlaceHistoryMapper;
     private GymListView gymListView;
@@ -69,20 +70,20 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
     public GymListActivity(
             PlaceController placeController,
             GymListView gymListView,
-            CreateGymDialogBox createGymDialogBox,
+            EditCreateGymDialogBox editCreateGymDialogBox,
             AdminRequestFactory adminRequestFactory,
             PlaceHistoryMapper adminPlaceHistoryMapper)
     {
         this.gymListView = gymListView;
         this.placeController = placeController;
-        this.createGymDialogBox = createGymDialogBox;
+        this.editCreateGymDialogBox = editCreateGymDialogBox;
         this.adminRequestFactory = adminRequestFactory;
         this.adminPlaceHistoryMapper = adminPlaceHistoryMapper;
         this.gymListDataProvider = new GymListDataProvider(adminRequestFactory);
     }
 
     public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-        createGymDialogBox.setPresenter(this);
+        editCreateGymDialogBox.setPresenter(this);
         gymListView.setPresenter(this);
         containerWidget.setWidget(gymListView.asWidget());
         // Triggers listDataProvider#onRangeChanged() to call for data
@@ -98,9 +99,9 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
         GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
         GymProxy newGym = gymListRequest.create(GymProxy.class);
         newGym.setName("The spot");
-        gymListRequest.save(newGym).fire(new Receiver<Void>() {
+        gymListRequest.save(newGym).fire(new Receiver<GymProxy>() {
             @Override
-            public void onSuccess(Void response) {
+            public void onSuccess(GymProxy response) {
                 gymListDataProvider.onRangeChanged(gymListView.getDataTable());
                 logger.fine("Gym created");
             }
@@ -123,5 +124,30 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
     public String getHistoryToken(GymProxy gym) {
         String proxyToken = adminRequestFactory.getHistoryToken(gym.stableId());
         return adminPlaceHistoryMapper.getToken(new GymPreviewPlace(proxyToken));
+    }
+
+    public void editGym(GymProxy gym) {
+        editCreateGymDialogBox.setGymProxy(gym);
+        editCreateGymDialogBox.show();
+    }
+
+    public AdminRequestFactory getRequestFactory() {
+        return adminRequestFactory;
+    }
+
+    public void openNewGymDialog() {
+        GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
+        GymProxy newGym = gymListRequest.create(GymProxy.class);
+        newGym.setName("The spot");
+        gymListRequest.save(newGym).fire(new Receiver<GymProxy>() {
+            @Override
+            public void onSuccess(GymProxy newGym) {
+                editCreateGymDialogBox.setGymProxy(newGym);
+                editCreateGymDialogBox.show();
+            }
+        }
+        );
+
+
     }
 }

@@ -1,5 +1,6 @@
 package org.myboulderlog.shared.request;
 
+import com.google.gwt.requestfactory.shared.InstanceRequest;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface GymListRequest extends RequestContext {
     Request<List<GymProxy>> listAll();
 
-    Request<Void> save(GymProxy newGym);
+    Request<GymProxy> save(GymProxy newGym);
 
     Request<Void> remove(GymProxy gymProxy);
 }
