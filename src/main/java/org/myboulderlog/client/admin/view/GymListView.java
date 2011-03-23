@@ -20,7 +20,7 @@ public interface GymListView extends IsWidget {
 
         String getHistoryToken(GymProxy gym);
 
-        void editGym(GymProxy gym);
+        void openEditGymDialog(GymProxy gym);
 
         AdminRequestFactory getRequestFactory();
 

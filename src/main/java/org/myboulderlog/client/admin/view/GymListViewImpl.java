@@ -145,7 +145,7 @@ public class GymListViewImpl extends Composite implements GymListView {
         };
         ActionCell<GymProxy> editButtonCell = new ActionCell<GymProxy>("Edit", new ActionCell.Delegate<GymProxy>() {
             public void execute(GymProxy gym) {
-                presenter.editGym(gym);
+                presenter.openEditGymDialog(gym);
             }
         }
         );
