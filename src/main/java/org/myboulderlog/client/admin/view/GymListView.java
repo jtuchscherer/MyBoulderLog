@@ -16,6 +16,8 @@ public interface GymListView extends IsWidget {
 
         void createButtonClicked();
 
+        void cancelButtonClicked();
+
         void removeGym(GymProxy gymProxy);
 
         String getHistoryToken(GymProxy gym);

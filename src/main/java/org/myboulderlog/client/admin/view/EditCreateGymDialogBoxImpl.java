@@ -1,6 +1,7 @@
 package org.myboulderlog.client.admin.view;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.editor.client.EditorError;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.requestfactory.client.RequestFactoryEditorDriver;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -10,6 +11,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Widget;
 import org.myboulderlog.shared.proxy.GymProxy;
+
+import java.util.ArrayList;
 
 
 public class EditCreateGymDialogBoxImpl extends Widget implements EditCreateGymDialogBox {
@@ -35,6 +38,8 @@ public class EditCreateGymDialogBoxImpl extends Widget implements EditCreateGymD
 
     @UiHandler("cancelButton")
     void onCancelClick(ClickEvent event) {
+        presenter.cancelButtonClicked();
+        gymEditor.clearErrors();
         rootElement.hide();
     }
 

@@ -2,8 +2,11 @@ package org.myboulderlog.server.model;
 
 import com.google.appengine.api.blobstore.BlobKey;
 
+import javax.validation.constraints.NotNull;
+
 public class Gym extends AbstractDomainObject {
 
+    @NotNull
     private String name;
 
     private String description;

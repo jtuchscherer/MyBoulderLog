@@ -99,6 +99,10 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
         placeController.goTo(place);
     }
 
+    public void cancelButtonClicked() {
+        editorDriver = null;
+    }
+
     public void createButtonClicked() {
         logger.fine("createButtonClicked");
 
