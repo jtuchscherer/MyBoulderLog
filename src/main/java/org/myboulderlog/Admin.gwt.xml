@@ -8,6 +8,7 @@
     <inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name="com.google.gwt.editor.Editor"/>
+    <inherits name="com.google.gwt.requestfactory.RequestFactory"/>
 
     <!-- guice injector for gwt -->
     <inherits name="com.google.gwt.inject.Inject"/>
@@ -17,7 +18,6 @@
 
     <!--  inherit css based theme -->
     <inherits name='com.google.gwt.user.theme.standard.Standard'/>
-    <inherits name="com.google.gwt.requestfactory.RequestFactory"/>
 
     <!-- configure logging -->
     <set-property name="gwt.logging.enabled" value="TRUE"/>

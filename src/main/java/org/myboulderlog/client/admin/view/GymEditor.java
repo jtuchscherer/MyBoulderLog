@@ -27,17 +27,27 @@ public class GymEditor extends Composite implements Editor<GymProxy> {
     }
 
     @UiField
-    ValueBoxEditorDecorator<String> description;
+    RichTextAreaEditorDecorator<String> description;
+
+    @Ignore
+    @UiField(provided = true)
+    RichTextAreaEditor descriptionRichTextArea;
+
 
     @UiField
     ValueBoxEditorDecorator<String> name;
 
-
     @UiField
     Focusable nameBox;
 
+    @UiField(provided = true)
+    RichTextToolbar toolbar;
+
     public GymEditor() {
+        descriptionRichTextArea = new RichTextAreaEditor();
+        toolbar = new RichTextToolbar(descriptionRichTextArea);
         initWidget(GWT.<Binder>create(Binder.class).createAndBindUi(this));
+        toolbar.setWidth("100%");
     }
 
     public void focus() {

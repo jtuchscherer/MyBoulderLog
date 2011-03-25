@@ -1,21 +1,24 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:e='urn:import:com.google.gwt.editor.ui.client'>
-  <g:HTMLPanel>
-    <div>
-      Name:
-      <e:ValueBoxEditorDecorator ui:field="name">
-        <e:valuebox>
-          <g:TextBox ui:field="nameBox"/>
-        </e:valuebox>
-      </e:ValueBoxEditorDecorator>
-      <br />
-      Description:
-      <e:ValueBoxEditorDecorator ui:field="description">
-        <e:valuebox>
-          <g:TextBox/>
-        </e:valuebox>
-      </e:ValueBoxEditorDecorator>
-      <br/>
-    </div>
-  </g:HTMLPanel>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+             xmlns:boulderlog='urn:import:org.myboulderlog.client.admin.view'>
+    <g:HTMLPanel>
+        <div>
+            Name:
+            <e:ValueBoxEditorDecorator ui:field="name">
+                <e:valuebox>
+                    <g:TextBox ui:field="nameBox"/>
+                </e:valuebox>
+            </e:ValueBoxEditorDecorator>
+            <br/>
+            Description:
+            <boulderlog:RichTextToolbar ui:field="toolbar"/>
+            <boulderlog:RichTextAreaEditorDecorator ui:field="description">
+                <boulderlog:valuebox>
+                    <boulderlog:RichTextAreaEditor ui:field="descriptionRichTextArea"/>
+                </boulderlog:valuebox>
+            </boulderlog:RichTextAreaEditorDecorator>
+            <br/>
+        </div>
+    </g:HTMLPanel>
 </ui:UiBinder>
