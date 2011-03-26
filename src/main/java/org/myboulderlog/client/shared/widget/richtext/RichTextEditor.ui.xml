@@ -1,0 +1,7 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:VerticalPanel ui:field="outer">
+        <g:HorizontalPanel ui:field="topPanel" width="100%" styleName="gwt-RichTextToolbar"/>
+        <g:HorizontalPanel ui:field="bottomPanel" width="100%" styleName="gwt-RichTextToolbar"/>
+        <g:RichTextArea ui:field="richText" width="100%"/>
+    </g:VerticalPanel>
+</ui:UiBinder>

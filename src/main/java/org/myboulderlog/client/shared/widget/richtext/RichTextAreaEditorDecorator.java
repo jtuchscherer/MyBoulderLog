@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.myboulderlog.client.admin.view;
+package org.myboulderlog.client.shared.widget.richtext;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -57,7 +57,7 @@ import java.util.List;
  * @param <T> the type of data being edited
  */
 public class RichTextAreaEditorDecorator<T> extends Composite implements
-    HasEditorErrors<T>, IsEditor<RichTextAreaEditor> {
+    HasEditorErrors<T>, IsEditor<RichTextEditor> {
   interface Binder extends UiBinder<Widget, RichTextAreaEditorDecorator<?>> {
     Binder BINDER = GWT.create(Binder.class);
   }
@@ -68,7 +68,7 @@ public class RichTextAreaEditorDecorator<T> extends Composite implements
   @UiField
   DivElement errorLabel;
 
-  private RichTextAreaEditor editor;
+  private RichTextEditor editor;
 
   /**
    * Constructs a ValueBoxEditorDecorator.
@@ -79,36 +79,36 @@ public class RichTextAreaEditorDecorator<T> extends Composite implements
   }
 
   /**
-   * Constructs a ValueBoxEditorDecorator using a {@link ValueBoxBase}
-   * widget and a {@link ValueBoxEditor} editor.
+   * Constructs a RichTextAreaEditorDecorator using a {@link ValueBoxBase}
+   * widget and a {@link RichTextEditor} editor.
    * 
    * @param widget the widget
    * @param editor the editor
    */
   public RichTextAreaEditorDecorator(
-          ValueBoxBase<T> widget, RichTextAreaEditor editor) {
+          ValueBoxBase<T> widget, RichTextEditor editor) {
     this();
     contents.add(widget);
     this.editor = editor;
   }
 
   /**
-   * Returns the associated {@link ValueBoxEditor}.
+   * Returns the associated {@link RichTextEditor}.
    * 
-   * @return a {@link ValueBoxEditor} instance
-   * @see #setEditor(RichTextAreaEditor)
+   * @return a {@link RichTextEditor} instance
+   * @see #setEditor(RichTextEditor)
    */
-  public RichTextAreaEditor asEditor() {
+  public RichTextEditor asEditor() {
     return editor;
   }
 
   /**
-   * Sets the associated {@link ValueBoxEditor}.
+   * Sets the associated {@link RichTextEditor}.
    * 
-   * @param editor a {@link ValueBoxEditor} instance
+   * @param editor a {@link RichTextEditor} instance
    * @see #asEditor()
    */
-  public void setEditor(RichTextAreaEditor editor) {
+  public void setEditor(RichTextEditor editor) {
     this.editor = editor;
   }
 
@@ -118,8 +118,8 @@ public class RichTextAreaEditorDecorator<T> extends Composite implements
    * 
    * @param widget a {@link ValueBoxBase} widget
    */
-  @UiChild(limit = 1, tagname = "valuebox")
-  public void setValueBox(RichTextAreaEditor widget) {
+  @UiChild(limit = 1, tagname = "richtexteditor")
+  public void setRichTextEditor(RichTextEditor widget) {
     contents.add(widget);
     setEditor(widget.asEditor());
   }

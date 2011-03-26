@@ -1,6 +1,7 @@
-package org.myboulderlog.client.admin.view;
+package org.myboulderlog.client.shared.widget.richtext;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -10,6 +11,11 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiChild;
+import com.google.gwt.uibinder.client.UiConstructor;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -26,11 +32,10 @@ import com.google.gwt.user.client.ui.Widget;
  * for all rich text formatting, dynamically displayed only for the available
  * functionality.
  */
-@SuppressWarnings("deprecation")
-public class RichTextToolbar extends Composite {
+public class RichTextEditor extends Composite implements LeafValueEditor<String> {
 
-    public RichTextToolbar() {
-        //To change body of created methods use File | Settings | File Templates.
+    interface Binder extends UiBinder<Widget, RichTextEditor> {
+        Binder BINDER = GWT.create(Binder.class);
     }
 
     /**
@@ -156,7 +161,7 @@ public class RichTextToolbar extends Composite {
 
     /**
      * We use an inner EventHandler class to avoid exposing event methods on the
-     * RichTextToolbar itself.
+     * RichTextEditor itself.
      */
     private class EventHandler implements ClickHandler, ChangeHandler, KeyUpHandler {
 
@@ -234,7 +239,7 @@ public class RichTextToolbar extends Composite {
         public void onKeyUp(KeyUpEvent event) {
             Widget sender = (Widget) event.getSource();
             if (sender == richText) {
-                // We use the RichTextArea's onKeyUp event to update the toolbar status.
+                // We use the RichTextArea's onKeyUp event to update the descriptionEditor status.
                 // This will catch any cases where the user moves the cursur using the
                 // keyboard, or uses one of the browser's built-in keyboard shortcuts.
                 updateStatus();
@@ -252,16 +257,32 @@ public class RichTextToolbar extends Composite {
             RichTextArea.FontSize.XX_LARGE
     };
 
-    private Images images = (Images) GWT.create(Images.class);
     private Strings strings = (Strings) GWT.create(Strings.class);
     private EventHandler handler = new EventHandler();
-
-    private RichTextArea richText;
     private RichTextArea.Formatter formatter;
 
-    private VerticalPanel outer = new VerticalPanel();
-    private HorizontalPanel topPanel = new HorizontalPanel();
-    private HorizontalPanel bottomPanel = new HorizontalPanel();
+    @UiField
+    RichTextArea richText;
+
+    @UiHandler("richText")
+    public void onKeyUpEvent(KeyUpEvent event) {
+        handler.onKeyUp(event);
+    }
+
+    @UiHandler("richText")
+    public void onClickEvent(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    VerticalPanel outer;
+
+    @UiField
+    HorizontalPanel topPanel;
+
+    @UiField
+    HorizontalPanel bottomPanel;
+
     private ToggleButton bold;
     private ToggleButton italic;
     private ToggleButton underline;
@@ -286,20 +307,12 @@ public class RichTextToolbar extends Composite {
     private ListBox fonts;
     private ListBox fontSizes;
 
-    public RichTextToolbar(RichTextArea richText) {
-        this.richText = richText;
+    @UiConstructor
+    public RichTextEditor() {
+        initWidget(Binder.BINDER.createAndBindUi(this));
         this.formatter = richText.getFormatter();
 
-
-        outer.add(topPanel);
-        outer.add(bottomPanel);
-        topPanel.setWidth("100%");
-        bottomPanel.setWidth("100%");
-
-        initWidget(outer);
-        setStyleName("gwt-RichTextToolbar");
-        richText.addStyleName("hasRichTextToolbar");
-
+        Images images = (Images) GWT.create(Images.class);
         topPanel.add(bold = createToggleButton(images.bold(), strings.bold()));
         topPanel.add(italic = createToggleButton(images.italic(), strings.italic()));
         topPanel.add(underline = createToggleButton(images.underline(), strings.underline()));
@@ -322,12 +335,6 @@ public class RichTextToolbar extends Composite {
         bottomPanel.add(foreColors = createColorList("Foreground"));
         bottomPanel.add(fonts = createFontList());
         bottomPanel.add(fontSizes = createFontSizes());
-
-        // We only use these handlers for updating status, so don't hook them up
-        // unless at least basic editing is supported.
-        richText.addKeyUpHandler(handler);
-        richText.addClickHandler(handler);
-
     }
 
     private ListBox createColorList(String caption) {
@@ -401,5 +408,23 @@ public class RichTextToolbar extends Composite {
         subscript.setDown(formatter.isSubscript());
         superscript.setDown(formatter.isSuperscript());
         strikethrough.setDown(formatter.isStrikethrough());
+    }
+
+    /**
+     * Returns an Editor that is backed by the ValueBoxBase. The default
+     * implementation returns {@link com.google.gwt.editor.ui.client.adapters.ValueBoxEditor#of(com.google.gwt.user.client.ui.ValueBoxBase)}. Subclasses
+     * may override this method to provide custom error-handling when using the
+     * Editor framework.
+     */
+    public RichTextEditor asEditor() {
+        return this;
+    }
+
+    public String getValue() {
+        return this.richText.getHTML();
+    }
+
+    public void setValue(String text) {
+        this.richText.setHTML(text);
     }
 }

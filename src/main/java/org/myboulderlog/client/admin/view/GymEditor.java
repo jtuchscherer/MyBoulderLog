@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.Widget;
+import org.myboulderlog.client.shared.widget.richtext.RichTextAreaEditorDecorator;
 import org.myboulderlog.shared.proxy.GymProxy;
 
 import java.util.ArrayList;
@@ -29,25 +30,14 @@ public class GymEditor extends Composite implements Editor<GymProxy> {
     @UiField
     RichTextAreaEditorDecorator<String> description;
 
-    @Ignore
-    @UiField(provided = true)
-    RichTextAreaEditor descriptionRichTextArea;
-
-
     @UiField
     ValueBoxEditorDecorator<String> name;
 
     @UiField
     Focusable nameBox;
 
-    @UiField(provided = true)
-    RichTextToolbar toolbar;
-
     public GymEditor() {
-        descriptionRichTextArea = new RichTextAreaEditor();
-        toolbar = new RichTextToolbar(descriptionRichTextArea);
         initWidget(GWT.<Binder>create(Binder.class).createAndBindUi(this));
-        toolbar.setWidth("100%");
     }
 
     public void focus() {
