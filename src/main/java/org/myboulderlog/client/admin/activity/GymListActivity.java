@@ -147,8 +147,12 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
     }
 
     public void openEditGymDialog(GymProxy gym) {
-        editorDriver = editCreateGymDialogBox.createEditorDriver();
         GymListRequest requestContext = adminRequestFactory.gymListRequest();
+        prepareAndShowDialog(gym, requestContext);
+    }
+
+    private void prepareAndShowDialog(GymProxy gym, GymListRequest requestContext) {
+        editorDriver = editCreateGymDialogBox.createEditorDriver();
         requestContext.save(gym);
         editorDriver.edit(gym, requestContext);
         editCreateGymDialogBox.show();
@@ -158,13 +162,7 @@ public class GymListActivity extends AbstractActivity implements GymListView.Pre
         GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
         GymProxy newGym = gymListRequest.create(GymProxy.class);
         newGym.setName("The spot");
-        gymListRequest.save(newGym).fire(new Receiver<GymProxy>() {
-            @Override
-            public void onSuccess(GymProxy newGym) {
-                openEditGymDialog(newGym);
-            }
-        }
-        );
+        prepareAndShowDialog(newGym,gymListRequest);
     }
 
     public String getHistoryToken(GymProxy gym) {
