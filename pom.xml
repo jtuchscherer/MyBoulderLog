@@ -329,7 +329,7 @@
         <!-- convenience to define GWT version in one place -->
         <gwt.version>2.2.0</gwt.version>
         <!-- convenience to define GWT version in one place -->
-        <guice.version>3.0-rc2</guice.version>
+        <guice.version>3.0</guice.version>
 
         <!--  tell the compiler we can use 1.5 -->
         <maven.compiler.source>1.5</maven.compiler.source>
