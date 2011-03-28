@@ -12,14 +12,12 @@ import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -228,7 +226,7 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
                 formatter.insertUnorderedList();
             } else if (sender == removeFormat) {
                 formatter.removeFormat();
-            } else if (sender == richText) {
+            } else if (sender == richTextArea) {
                 // We use the RichTextArea's onKeyUp event to update the toolbar status.
                 // This will catch any cases where the user moves the cursur using the
                 // keyboard, or uses one of the browser's built-in keyboard shortcuts.
@@ -238,7 +236,7 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
 
         public void onKeyUp(KeyUpEvent event) {
             Widget sender = (Widget) event.getSource();
-            if (sender == richText) {
+            if (sender == richTextArea) {
                 // We use the RichTextArea's onKeyUp event to update the descriptionEditor status.
                 // This will catch any cases where the user moves the cursur using the
                 // keyboard, or uses one of the browser's built-in keyboard shortcuts.
@@ -262,86 +260,216 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
     private RichTextArea.Formatter formatter;
 
     @UiField
-    RichTextArea richText;
+    RichTextArea richTextArea;
 
-    @UiHandler("richText")
+    @UiHandler("richTextArea")
     public void onKeyUpEvent(KeyUpEvent event) {
         handler.onKeyUp(event);
     }
 
-    @UiHandler("richText")
-    public void onClickEvent(ClickEvent event) {
+    @UiHandler("richTextArea")
+    public void onRichTextAreaClick(ClickEvent event) {
         handler.onClick(event);
     }
 
     @UiField
-    VerticalPanel outer;
+    VerticalPanel container;
 
     @UiField
-    HorizontalPanel topPanel;
+    HorizontalPanel firstToolbar;
 
     @UiField
-    HorizontalPanel bottomPanel;
+    HorizontalPanel secondToolbar;
 
-    private ToggleButton bold;
-    private ToggleButton italic;
-    private ToggleButton underline;
-    private ToggleButton subscript;
-    private ToggleButton superscript;
-    private ToggleButton strikethrough;
-    private PushButton indent;
-    private PushButton outdent;
-    private PushButton justifyLeft;
-    private PushButton justifyCenter;
-    private PushButton justifyRight;
-    private PushButton hr;
-    private PushButton ol;
-    private PushButton ul;
-    private PushButton insertImage;
-    private PushButton createLink;
-    private PushButton removeLink;
-    private PushButton removeFormat;
+    @UiField
+    ToggleButton bold;
 
-    private ListBox backColors;
-    private ListBox foreColors;
-    private ListBox fonts;
-    private ListBox fontSizes;
+    @UiHandler("bold")
+    public void onBoldClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    ToggleButton italic;
+
+    @UiHandler("italic")
+    public void onItalicClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    ToggleButton underline;
+
+    @UiHandler("underline")
+    public void onUnderlineClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    ToggleButton subscript;
+
+    @UiHandler("subscript")
+    public void onSubcsriptClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public ToggleButton superscript;
+
+    @UiHandler("superscript")
+    public void onSuperscriptClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public ToggleButton strikethrough;
+
+    @UiHandler("strikethrough")
+    public void onStrikeThroughClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton indent;
+
+    @UiHandler("indent")
+    public void onIndentClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton outdent;
+
+    @UiHandler("outdent")
+    public void onOutdentClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton justifyLeft;
+
+    @UiHandler("justifyLeft")
+    public void onJustifyLeftClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton justifyCenter;
+
+    @UiHandler("justifyCenter")
+    public void onJustifyCenterClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton justifyRight;
+
+    @UiHandler("justifyRight")
+    public void onJustifyRigthClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton hr;
+
+    @UiHandler("hr")
+    public void onHrClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton ol;
+
+    @UiHandler("ol")
+    public void onOlClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton ul;
+
+    @UiHandler("ul")
+    public void onUlClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton insertImage;
+
+    @UiHandler("insertImage")
+    public void onInsertImageClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton createLink;
+
+    @UiHandler("createLink")
+    public void onCreateLinkClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton removeLink;
+
+    @UiHandler("removeLink")
+    public void onRemoveLinkClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public PushButton removeFormat;
+
+
+    @UiHandler("removeFormat")
+    public void onRemoveFormatClick(ClickEvent event) {
+        handler.onClick(event);
+    }
+
+    @UiField
+    public ListBox backColors;
+
+    @UiHandler("backColors")
+    public void onBackColorChange(ChangeEvent event) {
+        handler.onChange(event);
+    }
+
+    @UiField
+    public ListBox foreColors;
+
+    @UiHandler("foreColors")
+    public void onForeColorChange(ChangeEvent event) {
+        handler.onChange(event);
+    }
+
+    @UiField
+    public ListBox fonts;
+
+    @UiHandler("fonts")
+    public void onFontChange(ChangeEvent event) {
+        handler.onChange(event);
+    }
+
+    @UiField
+    public ListBox fontSizes;
+
+    @UiHandler("fontSizes")
+    public void onFontSizesChange(ChangeEvent event) {
+        handler.onChange(event);
+    }
 
     @UiConstructor
     public RichTextEditor() {
         initWidget(Binder.BINDER.createAndBindUi(this));
-        this.formatter = richText.getFormatter();
+        this.formatter = richTextArea.getFormatter();
 
-        Images images = (Images) GWT.create(Images.class);
-        topPanel.add(bold = createToggleButton(images.bold(), strings.bold()));
-        topPanel.add(italic = createToggleButton(images.italic(), strings.italic()));
-        topPanel.add(underline = createToggleButton(images.underline(), strings.underline()));
-        topPanel.add(subscript = createToggleButton(images.subscript(), strings.subscript()));
-        topPanel.add(superscript = createToggleButton(images.superscript(), strings.superscript()));
-        topPanel.add(justifyLeft = createPushButton(images.justifyLeft(), strings.justifyLeft()));
-        topPanel.add(justifyCenter = createPushButton(images.justifyCenter(), strings.justifyCenter()));
-        topPanel.add(justifyRight = createPushButton(images.justifyRight(), strings.justifyRight()));
-        topPanel.add(strikethrough = createToggleButton(images.strikeThrough(), strings.strikeThrough()));
-        topPanel.add(indent = createPushButton(images.indent(), strings.indent()));
-        topPanel.add(outdent = createPushButton(images.outdent(), strings.outdent()));
-        topPanel.add(hr = createPushButton(images.hr(), strings.hr()));
-        topPanel.add(ol = createPushButton(images.ol(), strings.ol()));
-        topPanel.add(ul = createPushButton(images.ul(), strings.ul()));
-        topPanel.add(insertImage = createPushButton(images.insertImage(), strings.insertImage()));
-        topPanel.add(createLink = createPushButton(images.createLink(), strings.createLink()));
-        topPanel.add(removeLink = createPushButton(images.removeLink(), strings.removeLink()));
-        topPanel.add(removeFormat = createPushButton(images.removeFormat(), strings.removeFormat()));
-        bottomPanel.add(backColors = createColorList("Background"));
-        bottomPanel.add(foreColors = createColorList("Foreground"));
-        bottomPanel.add(fonts = createFontList());
-        bottomPanel.add(fontSizes = createFontSizes());
+        createColorList(backColors, "Background");
+        createColorList(foreColors, "Foreground");
+        createFontList(fonts);
+        createFontSizes(fontSizes);
     }
 
-    private ListBox createColorList(String caption) {
-        ListBox lb = new ListBox();
-        lb.addChangeHandler(handler);
-        lb.setVisibleItemCount(1);
-
+    private void createColorList(ListBox lb, String caption) {
         lb.addItem(caption);
         lb.addItem(strings.white(), "white");
         lb.addItem(strings.black(), "black");
@@ -349,14 +477,9 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
         lb.addItem(strings.green(), "green");
         lb.addItem(strings.yellow(), "yellow");
         lb.addItem(strings.blue(), "blue");
-        return lb;
     }
 
-    private ListBox createFontList() {
-        ListBox lb = new ListBox();
-        lb.addChangeHandler(handler);
-        lb.setVisibleItemCount(1);
-
+    private void createFontList(ListBox lb) {
         lb.addItem(strings.font(), "");
         lb.addItem(strings.normal(), "");
         lb.addItem("Times New Roman", "Times New Roman");
@@ -365,14 +488,9 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
         lb.addItem("Georgia", "Georgia");
         lb.addItem("Trebuchet", "Trebuchet");
         lb.addItem("Verdana", "Verdana");
-        return lb;
     }
 
-    private ListBox createFontSizes() {
-        ListBox lb = new ListBox();
-        lb.addChangeHandler(handler);
-        lb.setVisibleItemCount(1);
-
+    private void createFontSizes(ListBox lb) {
         lb.addItem(strings.size());
         lb.addItem(strings.xxsmall());
         lb.addItem(strings.xsmall());
@@ -381,21 +499,6 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
         lb.addItem(strings.large());
         lb.addItem(strings.xlarge());
         lb.addItem(strings.xxlarge());
-        return lb;
-    }
-
-    private PushButton createPushButton(ImageResource img, String tip) {
-        PushButton pb = new PushButton(new Image(img));
-        pb.addClickHandler(handler);
-        pb.setTitle(tip);
-        return pb;
-    }
-
-    private ToggleButton createToggleButton(ImageResource img, String tip) {
-        ToggleButton tb = new ToggleButton(new Image(img));
-        tb.addClickHandler(handler);
-        tb.setTitle(tip);
-        return tb;
     }
 
     /**
@@ -421,10 +524,10 @@ public class RichTextEditor extends Composite implements LeafValueEditor<String>
     }
 
     public String getValue() {
-        return this.richText.getHTML();
+        return this.richTextArea.getHTML();
     }
 
     public void setValue(String text) {
-        this.richText.setHTML(text);
+        this.richTextArea.setHTML(text);
     }
 }

@@ -1,7 +1,107 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    <g:VerticalPanel ui:field="outer">
-        <g:HorizontalPanel ui:field="topPanel" width="100%" styleName="gwt-RichTextToolbar"/>
-        <g:HorizontalPanel ui:field="bottomPanel" width="100%" styleName="gwt-RichTextToolbar"/>
-        <g:RichTextArea ui:field="richText" width="100%"/>
+    <ui:with field='images' type='org.myboulderlog.client.shared.widget.richtext.RichTextEditor.Images'/>
+    <ui:with field='names' type='org.myboulderlog.client.shared.widget.richtext.RichTextEditor.Strings'/>
+
+    <g:VerticalPanel ui:field="container">
+        <g:HorizontalPanel ui:field="firstToolbar" width="100%" styleName="gwt-RichTextToolbar">
+            <g:ToggleButton ui:field="bold">
+                <g:upFace>
+                    <img title="{names.bold}" alt="{names.bold}" src='{images.bold.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:ToggleButton ui:field="italic">
+                <g:upFace>
+                    <img title="{names.italic}" alt="{names.italic}" src='{images.italic.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:ToggleButton ui:field="underline">
+                <g:upFace>
+                    <img title="{names.underline}" alt="{names.underline}" src='{images.underline.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:ToggleButton ui:field="subscript">
+                <g:upFace>
+                    <img title="{names.subscript}" alt="{names.subscript}" src='{images.subscript.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:ToggleButton ui:field="superscript">
+                <g:upFace>
+                    <img title="{names.superscript}" alt="{names.superscript}" src='{images.superscript.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:PushButton ui:field="justifyLeft">
+                <g:upFace>
+                    <img title="{names.justifyLeft}" alt="{names.justifyLeft}" src='{images.justifyLeft.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="justifyCenter">
+                <g:upFace>
+                    <img title="{names.justifyCenter}" alt="{names.justifyCenter}" src='{images.justifyCenter.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="justifyRight">
+                <g:upFace>
+                    <img title="{names.justifyRight}" alt="{names.justifyRight}" src='{images.justifyRight.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:ToggleButton ui:field="strikethrough">
+                <g:upFace>
+                    <img title="{names.strikeThrough}" alt="{names.strikeThrough}" src='{images.strikeThrough.getURL}'/>
+                </g:upFace>
+            </g:ToggleButton>
+            <g:PushButton ui:field="indent">
+                <g:upFace>
+                    <img title="{names.indent}" alt="{names.indent}" src='{images.indent.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="outdent">
+                <g:upFace>
+                    <img title="{names.outdent}" alt="{names.outdent}" src='{images.outdent.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="hr">
+                <g:upFace>
+                    <img title="{names.hr}" alt="{names.hr}" src='{images.hr.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="ol">
+                <g:upFace>
+                    <img title="{names.ol}" alt="{names.ol}" src='{images.ol.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="ul">
+                <g:upFace>
+                    <img title="{names.ul}" alt="{names.ul}" src='{images.ul.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="insertImage">
+                <g:upFace>
+                    <img title="{names.insertImage}" alt="{names.insertImage}" src='{images.insertImage.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="createLink">
+                <g:upFace>
+                    <img title="{names.createLink}" alt="{names.createLink}" src='{images.createLink.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="removeLink">
+                <g:upFace>
+                    <img title="{names.removeLink}" alt="{names.removeLink}" src='{images.removeLink.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+            <g:PushButton ui:field="removeFormat">
+                <g:upFace>
+                    <img title="{names.removeFormat}" alt="{names.removeFormat}" src='{images.removeFormat.getURL}'/>
+                </g:upFace>
+            </g:PushButton>
+        </g:HorizontalPanel>
+        <g:HorizontalPanel ui:field="secondToolbar" width="100%" styleName="gwt-RichTextToolbar">
+            <g:ListBox ui:field="backColors" visibleItemCount="1"/>
+            <g:ListBox ui:field="foreColors" visibleItemCount="1"/>
+            <g:ListBox ui:field="fonts" visibleItemCount="1"/>
+            <g:ListBox ui:field="fontSizes" visibleItemCount="1"/>
+        </g:HorizontalPanel>
+        <g:RichTextArea ui:field="richTextArea" width="100%"/>
     </g:VerticalPanel>
+
 </ui:UiBinder>
