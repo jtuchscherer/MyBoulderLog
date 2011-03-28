@@ -10,7 +10,7 @@
     }
   </ui:style>
   <g:HTMLPanel>
-    <div class="{style.errorLabel}" ui:field="errorLabel" />
+    <div ui:field="errorLabel" class="{style.errorLabel}"   />
     <g:SimplePanel ui:field="contents" stylePrimaryName="{style.contents}" />
   </g:HTMLPanel>
 </ui:UiBinder>
