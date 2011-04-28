@@ -1,4 +1,4 @@
-package org.myboulderlog.client.admin.view;
+package org.myboulderlog.client.admin.view.route;
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.EditTextCell;
@@ -18,19 +18,22 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Inject;
+import org.myboulderlog.client.admin.view.gym.EditCreateGymDialogBox;
+import org.myboulderlog.client.admin.view.gym.GymListView;
+import org.myboulderlog.client.admin.view.gym.RatingSystemDialogBox;
 import org.myboulderlog.client.shared.view.HyperlinkCell;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.proxy.GymProxyKeyProvider;
 
-public class GymListViewImpl extends Composite implements GymListView {
+public class RouteListViewImpl extends Composite implements GymListView {
 
-    private GymListView.Presenter presenter;
+    private Presenter presenter;
     private Column<GymProxy, String> nameColumn;
     private GymProxyKeyProvider gymProxyKeyProvider;
     private EditCreateGymDialogBox editCreateGymDialogBox;
     private RatingSystemDialogBox ratingSystemDialog;
 
-    public void setPresenter(GymListView.Presenter presenter) {
+    public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -42,7 +45,7 @@ public class GymListViewImpl extends Composite implements GymListView {
         return cellTable;
     }
 
-    interface WidgetUiBinder extends UiBinder<Widget, GymListViewImpl> {
+    interface WidgetUiBinder extends UiBinder<Widget, RouteListViewImpl> {
     }
 
     private static WidgetUiBinder uiBinder = GWT.create(WidgetUiBinder.class);
@@ -74,7 +77,7 @@ public class GymListViewImpl extends Composite implements GymListView {
      * Initialize this example.
      */
     @Inject
-    public GymListViewImpl(
+    public RouteListViewImpl(
             GymProxyKeyProvider gymProxyKeyProvider,
             EditCreateGymDialogBox editCreateGymDialogBox,
             RatingSystemDialogBox ratingSystemDialogBox)

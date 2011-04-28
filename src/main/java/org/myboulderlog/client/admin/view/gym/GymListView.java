@@ -1,4 +1,4 @@
-package org.myboulderlog.client.admin.view;
+package org.myboulderlog.client.admin.view.gym;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.cellview.client.Column;

@@ -1,4 +1,4 @@
-package org.myboulderlog.client.admin.view;
+package org.myboulderlog.client.admin.view.gym;
 
 import com.google.gwt.user.client.ui.Widget;
 import org.myboulderlog.shared.proxy.GymProxy;
