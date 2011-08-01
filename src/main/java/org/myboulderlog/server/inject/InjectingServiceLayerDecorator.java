@@ -1,12 +1,11 @@
 package org.myboulderlog.server.inject;
 
-import com.google.gwt.requestfactory.server.ServiceLayerDecorator;
-import com.google.gwt.requestfactory.shared.Locator;
-import com.google.gwt.requestfactory.shared.Service;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-
-import java.lang.reflect.Method;
+import com.google.web.bindery.requestfactory.server.ServiceLayerDecorator;
+import com.google.web.bindery.requestfactory.shared.Locator;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.Service;
 
 /**
  * InjectingServiceLayerDecorator is a ServiceLayerDecorator that uses DI to inject
@@ -34,10 +33,8 @@ public class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
         return injector.getInstance(clazz);
     }
 
-    @Override
-    public Object createServiceInstance(Method contextMethod, Method domainMethod) {
-        Class<?> enclosing = contextMethod.getDeclaringClass();
-        Service s = enclosing.getAnnotation(Service.class);
+    public Object createServiceInstance(Class<? extends RequestContext> requestContext) {
+        Service s = requestContext.getAnnotation(Service.class);
         return injector.getInstance(s.value());
     }
 

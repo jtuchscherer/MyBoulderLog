@@ -2,11 +2,12 @@ package org.myboulderlog.server.dao.objectify;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 import com.googlecode.objectify.helper.DAOBase;
 import org.myboulderlog.server.dao.AbstractDAO;
+import org.myboulderlog.server.model.AbstractDomainObject;
 import org.myboulderlog.shared.exception.TooManyResultsException;
+import org.slf4j.Logger;
 
 import javax.persistence.Embedded;
 import javax.persistence.Transient;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractObjectifyDAO<T> extends DAOBase implements AbstractDAO<T> {
+public abstract class AbstractObjectifyDAO<T extends AbstractDomainObject> extends DAOBase implements AbstractDAO<T> {
 
     static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 
@@ -27,6 +28,22 @@ public abstract class AbstractObjectifyDAO<T> extends DAOBase implements Abstrac
 
     public Class<T> getClazz() {
         return clazz;
+    }
+
+     public T save(T entity) {
+        Key key = this.put(entity);
+        try {
+            return this.get(key);
+        } catch (Exception e) {
+            getLogger().error("Was not able to save and return requested Object", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected abstract Logger getLogger();
+
+    public void remove(T entity) {
+        this.delete(entity);
     }
 
     public Key<T> put(T entity)

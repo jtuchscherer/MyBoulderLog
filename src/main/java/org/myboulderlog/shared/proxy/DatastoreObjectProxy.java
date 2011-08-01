@@ -1,6 +1,6 @@
 package org.myboulderlog.shared.proxy;
 
-import com.google.gwt.requestfactory.shared.EntityProxy;
+import com.google.web.bindery.requestfactory.shared.EntityProxy;
 
 public interface DatastoreObjectProxy extends EntityProxy {
 

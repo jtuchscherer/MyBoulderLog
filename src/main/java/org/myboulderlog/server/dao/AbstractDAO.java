@@ -2,12 +2,18 @@ package org.myboulderlog.server.dao;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Key;
+import org.myboulderlog.server.model.AbstractDomainObject;
 import org.myboulderlog.shared.exception.TooManyResultsException;
 
 import java.util.List;
 import java.util.Map;
 
-public interface AbstractDAO<T> {
+public interface AbstractDAO<T extends AbstractDomainObject> {
+
+    public T save(T entity);
+
+    public void remove(T entity);
+
     Key<T> put(T entity);
 
     Map<Key<T>, T> putAll(Iterable<T> entities);

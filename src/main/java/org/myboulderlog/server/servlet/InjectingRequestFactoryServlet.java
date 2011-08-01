@@ -1,7 +1,7 @@
 package org.myboulderlog.server.servlet;
 
-import com.google.gwt.requestfactory.server.DefaultExceptionHandler;
-import com.google.gwt.requestfactory.server.RequestFactoryServlet;
+import com.google.web.bindery.requestfactory.server.DefaultExceptionHandler;
+import com.google.web.bindery.requestfactory.server.RequestFactoryServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.myboulderlog.server.inject.InjectingServiceLayerDecorator;

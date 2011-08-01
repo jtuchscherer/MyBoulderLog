@@ -1,9 +1,8 @@
 package org.myboulderlog.shared.request;
 
-import com.google.gwt.requestfactory.shared.InstanceRequest;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.RequestContext;
-import com.google.gwt.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.Service;
 import org.myboulderlog.server.dao.GymDAO;
 import org.myboulderlog.server.locator.DaoServiceLocator;
 import org.myboulderlog.shared.proxy.GymProxy;

@@ -5,18 +5,17 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.requestfactory.client.RequestFactoryEditorDriver;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.RequestContext;
-import com.google.gwt.requestfactory.shared.Violation;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
-import org.myboulderlog.client.admin.place.GymPreviewPlace;
-import org.myboulderlog.client.admin.view.gym.EditCreateGymDialogBox;
+import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.Violation;
+import org.myboulderlog.client.admin.view.EditCreateDialogBox;
+import org.myboulderlog.client.admin.view.GenericListView;
 import org.myboulderlog.client.admin.view.gym.GymEditor;
-import org.myboulderlog.client.admin.view.gym.GymListView;
 import org.myboulderlog.shared.proxy.DatastoreObjectProxy;
 import org.myboulderlog.shared.proxy.GymProxy;
 import org.myboulderlog.shared.request.AdminRequestFactory;
@@ -26,13 +25,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-public abstract class GenericListActivity<T extends DatastoreObjectProxy> extends AbstractActivity {
+public abstract class GenericListActivity<T extends DatastoreObjectProxy> extends AbstractActivity implements GenericListView.Presenter<T>{
 
     protected PlaceController placeController;
-    protected EditCreateGymDialogBox editCreateGymDialogBox;
+    protected EditCreateDialogBox editCreateDialogBox;
     protected AdminRequestFactory adminRequestFactory;
     protected PlaceHistoryMapper adminPlaceHistoryMapper;
-    protected GymListView gymListView;
+    protected GenericListView listView;
     protected GymListDataProvider gymListDataProvider;
     protected Logger logger = Logger.getLogger(this.getClass().getName());
     protected RequestFactoryEditorDriver<GymProxy, GymEditor> editorDriver;
@@ -71,11 +70,11 @@ public abstract class GenericListActivity<T extends DatastoreObjectProxy> extend
     }
 
     public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-        editCreateGymDialogBox.setPresenter(this);
-        gymListView.setPresenter(this);
-        containerWidget.setWidget(gymListView.asWidget());
+        editCreateDialogBox.setPresenter(this);
+        listView.setPresenter(this);
+        containerWidget.setWidget(listView.asWidget());
         // Triggers listDataProvider#onRangeChanged() to call for data
-        gymListDataProvider.addDataDisplay(gymListView.getDataTable());
+        gymListDataProvider.addDataDisplay(listView.getDataTable());
     }
 
     public void goTo(Place place) {
@@ -93,7 +92,7 @@ public abstract class GenericListActivity<T extends DatastoreObjectProxy> extend
 
         // Check for errors
         if (editorDriver.hasErrors()) {
-            editCreateGymDialogBox.setText("Errors detected locally");
+            editCreateDialogBox.setText("Errors detected locally");
             return;
         }
 
@@ -102,32 +101,22 @@ public abstract class GenericListActivity<T extends DatastoreObjectProxy> extend
             @Override
             public void onSuccess(Void response) {
                 // If everything went as planned, just dismiss the dialog box
-                editCreateGymDialogBox.hide();
-                gymListDataProvider.onRangeChanged(gymListView.getDataTable());
+                editCreateDialogBox.hide();
+                gymListDataProvider.onRangeChanged(listView.getDataTable());
                 logger.fine("Gym created");
             }
 
             @Override
             public void onViolation(Set<Violation> errors) {
                 // Otherwise, show ConstraintViolations in the UI
-                editCreateGymDialogBox.setText("Errors detected on the server");
+                editCreateDialogBox.setText("Errors detected on the server");
                 editorDriver.setViolations(errors);
             }
         }
         );
     }
 
-    public void removeGym(GymProxy gymProxy) {
-        GymListRequest gymListRequest = adminRequestFactory.gymListRequest();
-        gymListRequest.remove(gymProxy).fire(new Receiver<Void>() {
-            @Override
-            public void onSuccess(Void response) {
-                gymListDataProvider.onRangeChanged(gymListView.getDataTable());
-                logger.fine("Gym deleted");
-            }
-        }
-        );
-    }
+    public abstract void removeProxy(T proxy);
 
     public void openEditGymDialog(GymProxy gym) {
         GymListRequest requestContext = adminRequestFactory.gymListRequest();
@@ -135,10 +124,10 @@ public abstract class GenericListActivity<T extends DatastoreObjectProxy> extend
     }
 
     private void prepareAndShowDialog(GymProxy gym, GymListRequest requestContext) {
-        editorDriver = editCreateGymDialogBox.createEditorDriver();
+        editorDriver = editCreateDialogBox.createEditorDriver();
         requestContext.save(gym);
         editorDriver.edit(gym, requestContext);
-        editCreateGymDialogBox.show();
+        editCreateDialogBox.show();
     }
 
     public void openNewGymDialog() {
@@ -148,10 +137,7 @@ public abstract class GenericListActivity<T extends DatastoreObjectProxy> extend
         prepareAndShowDialog(newGym,gymListRequest);
     }
 
-    public String getHistoryToken(T proxy) {
-        String proxyToken = adminRequestFactory.getHistoryToken(proxy.stableId());
-        return adminPlaceHistoryMapper.getToken(new GymPreviewPlace(proxyToken));
-    }
+    public abstract String getHistoryToken(T proxy);
 
     public AdminRequestFactory getRequestFactory() {
         return adminRequestFactory;

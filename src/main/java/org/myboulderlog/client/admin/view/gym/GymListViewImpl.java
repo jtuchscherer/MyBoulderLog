@@ -133,7 +133,7 @@ public class GymListViewImpl extends Composite implements GymListView {
         );
         ActionCell<GymProxy> deleteButtonCell = new ActionCell<GymProxy>("Delete", new ActionCell.Delegate<GymProxy>() {
             public void execute(GymProxy gym) {
-                presenter.removeGym(gym);
+                presenter.removeProxy(gym);
             }
         }
         );

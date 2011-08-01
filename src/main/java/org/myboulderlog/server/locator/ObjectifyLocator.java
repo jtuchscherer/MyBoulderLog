@@ -1,6 +1,6 @@
 package org.myboulderlog.server.locator;
 
-import com.google.gwt.requestfactory.shared.Locator;
+import com.google.web.bindery.requestfactory.shared.Locator;
 import com.google.inject.Inject;
 import com.googlecode.objectify.helper.DAOBase;
 import org.myboulderlog.server.model.AbstractDomainObject;

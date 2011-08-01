@@ -1,7 +1,7 @@
 package org.myboulderlog.shared.request;
 
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
 import org.myboulderlog.shared.proxy.DatastoreObjectProxy;
 
 import java.util.List;

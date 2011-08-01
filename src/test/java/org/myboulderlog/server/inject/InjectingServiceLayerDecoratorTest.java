@@ -1,6 +1,7 @@
 package org.myboulderlog.server.inject;
 
 import com.google.inject.Injector;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
 import org.myboulderlog.TestUtils;
 import org.myboulderlog.server.dao.RouteDAO;
 import org.myboulderlog.server.locator.ObjectifyLocator;
@@ -41,7 +42,7 @@ public class InjectingServiceLayerDecoratorTest {
         Class routeRequestClazz = RouteRequest.class;
         Method listAllMethod = routeRequestClazz.getMethod("listAll");
         InjectingServiceLayerDecorator injectingServiceLayerDecorator = new InjectingServiceLayerDecorator(injector);
-        Object serviceInstance = injectingServiceLayerDecorator.createServiceInstance(listAllMethod, null);
+        Object serviceInstance = injectingServiceLayerDecorator.createServiceInstance((Class<? extends RequestContext>) listAllMethod.getDeclaringClass());
         assertTrue(serviceInstance instanceof RouteDAO);
     }
 }

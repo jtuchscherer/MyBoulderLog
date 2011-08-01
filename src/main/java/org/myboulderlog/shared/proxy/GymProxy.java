@@ -1,6 +1,6 @@
 package org.myboulderlog.shared.proxy;
 
-import com.google.gwt.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import org.myboulderlog.server.locator.ObjectifyLocator;
 import org.myboulderlog.server.model.Gym;
 

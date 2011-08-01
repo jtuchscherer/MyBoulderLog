@@ -1,5 +1,5 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:boulderlog='urn:import:org.myboulderlog.client.admin.view'
+             xmlns:boulderlog='urn:import:org.myboulderlog.client.admin.view.gym'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:DialogBox>
         <g:caption>

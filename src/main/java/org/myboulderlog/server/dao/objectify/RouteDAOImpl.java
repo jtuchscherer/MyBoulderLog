@@ -11,6 +11,11 @@ public class RouteDAOImpl extends AbstractObjectifyDAO<Route> implements RouteDA
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Override
+    protected Logger getLogger() {
+        return this.logger;
+    }
+
     public Route saveAndReturn(Route route) {
         Key<Route> key = this.put(route);
         try {

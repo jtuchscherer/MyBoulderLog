@@ -1,16 +1,8 @@
 package org.myboulderlog.client.admin.view.gym;
 
-import com.google.gwt.requestfactory.client.RequestFactoryEditorDriver;
+import org.myboulderlog.client.admin.view.EditCreateDialogBox;
 import org.myboulderlog.shared.proxy.GymProxy;
 
-public interface EditCreateGymDialogBox {
-    void show();
+public interface EditCreateGymDialogBox extends EditCreateDialogBox<GymProxy,GymEditor> {
 
-    void hide();
-
-    void setText(String text);
-
-    void setPresenter(GymListView.Presenter presenter);
-
-    RequestFactoryEditorDriver<GymProxy, GymEditor> createEditorDriver();
 }

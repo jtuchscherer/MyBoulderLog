@@ -1,6 +1,6 @@
 package org.myboulderlog.server.locator;
 
-import com.google.gwt.requestfactory.shared.ServiceLocator;
+import com.google.web.bindery.requestfactory.shared.ServiceLocator;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
